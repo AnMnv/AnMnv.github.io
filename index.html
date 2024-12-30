@@ -244,8 +244,8 @@
       const char = currentLine.charAt(charIndex);
       const span = document.createElement('span');
       
-      // Плавное появление символов
-      span.innerHTML = char === ' ' ? '&nbsp;' : char; // Учитываем пробелы
+      // Smooth appearance of characters
+      span.innerHTML = char === ' ' ? '&nbsp;' : char; // Handle spaces
       span.style.opacity = 0; // Start with opacity 0
       span.style.transition = 'opacity 0.5s'; // Smooth transition for opacity
       typingText.appendChild(span);
@@ -287,13 +287,19 @@
   const playAudio = () => {
     const audio = document.getElementById('pain-audio');
     if (audio) {
-      audio.play().catch(err => console.error('Audio play failed:', err));
+      audio.play()
+        .catch(err => {
+          console.error('Audio play failed:', err);
+          alert('Audio playback blocked. Please tap to allow.');
+        });
     }
   };
 
   // Event listeners for audio
-  document.getElementById('pain-image').addEventListener('click', playAudio);
-  document.getElementById('audio-trigger').addEventListener('click', playAudio);
+  const painImage = document.getElementById('pain-image');
+  const audioTrigger = document.getElementById('audio-trigger');
+  painImage.addEventListener('click', playAudio);
+  audioTrigger.addEventListener('click', playAudio);
 </script>
 
 <style>
