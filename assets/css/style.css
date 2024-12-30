@@ -959,6 +959,11 @@ header ul li a.active {
   text-align: center;
 }
 
+.spaced-text {
+    word-spacing: 520px; /* Увеличивает расстояние между символами */
+    text-align: right;  /* Выравнивает текст по центру */
+  }
+
 .card-image {
   max-width: 100%;
   height: auto;
