@@ -87,7 +87,7 @@
         <div class="content">
           <div class="column">
             <p data-aos="fade-right" data-aos-duration="1000">
-              Scientist  M.Sc. and Ph.D. candidate in Advanced Nanoscience and Nanotechnology.
+              Scientist  M.Sc. and Ph.D. candidate in Advanced Nanoscience and Nanotechnology. 
             </p>
           </div>
           <div class="img" style="position: relative;">
@@ -240,7 +240,7 @@
     if (charIndex < currentLine.length) {
       const char = currentLine.charAt(charIndex);
       const span = document.createElement('span');
-      
+
       // Smooth appearance of characters
       span.innerHTML = char === ' ' ? '&nbsp;' : char; // Handle spaces
       span.style.opacity = 0; // Start with opacity 0
@@ -255,20 +255,22 @@
       charIndex++;
       setTimeout(typeText, 100); // Speed of typing (100ms per character)
     } else {
-      // Proceed to the next line
+      // Proceed to the next line with a delay
       const nextLine = lines.shift();
       if (nextLine !== undefined) {
-        typingText.appendChild(document.createElement('br'));
-        typingText.appendChild(document.createElement('br'));
-        currentLine = nextLine.trim();
-        charIndex = 0;
-        typeText();
+        setTimeout(() => {
+          typingText.appendChild(document.createElement('br'));
+          typingText.appendChild(document.createElement('br'));
+          currentLine = nextLine.trim();
+          charIndex = 0;
+          typeText();
+        }, 500); // Delay after <br><br> (500ms)
       }
     }
   };
 
   // Start typing effect when visible
-  const observer = new IntersectionObserver((entries) => {
+  const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         currentLine = lines.shift();
@@ -292,12 +294,12 @@
     }
   };
 
-  // Event listeners for audio
-  const painImage = document.getElementById('pain-image');
+  // Event listener for audio
   const audioTrigger = document.getElementById('audio-trigger');
-  painImage.addEventListener('click', playAudio);
   audioTrigger.addEventListener('click', playAudio);
 </script>
+
+
 
 <style>
   #typing-text span {
