@@ -347,6 +347,7 @@ header ul li a.active {
 }
 
 .column {
+  height: 300px; /* Устанавливает фиксированную высоту */
   box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.05);
   border-radius: 1rem;
   backdrop-filter: blur(1rem);
