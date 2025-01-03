@@ -177,7 +177,10 @@ body {
   }
 }
 
-
+.blurred {
+  filter: blur(var(--blur-amount, 5px));
+  transition: filter 0.3s ease;
+}
 
 
 
