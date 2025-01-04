@@ -158,6 +158,7 @@ body {
   transform: translate(-50%, -50%);
   border-radius: 0.7rem;
   z-index: 1;
+  max-width: 100%;
 }
 
 .button-content {
@@ -177,10 +178,41 @@ body {
   }
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Скрыть горизонтальную прокрутку */
+}
+
 .blurred {
   filter: blur(var(--blur-amount, 5px));
-  transition: filter 0.3s ease;
+  transition: filter 0.5s;
 }
+
+
+
+
+
+/* simple-button */
+.simple-button {
+  position: relative;
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  background: rgba(8, 8, 8, 0.8); /* Однородный цвет фона */
+  padding: 0.2em 0.5em;
+  border-radius: 0.6rem;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  text-align: center;
+  max-width: 150px; /* Ограничение ширины */
+  word-wrap: break-word; /* Перенос текста */
+}
+
+
 
 
 

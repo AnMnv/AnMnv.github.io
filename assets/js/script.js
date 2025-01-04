@@ -76,15 +76,3 @@ window.onscroll=()=>{
 }
 
 
-// JavaScript
-const blurTrigger = document.getElementById('blur-trigger');
-const body = document.body;
-
-blurTrigger.addEventListener('click', () => {
-  const isBlurred = body.classList.toggle('blurred');
-  if (isBlurred) {
-    document.documentElement.style.setProperty('--blur-amount', '7px'); // Change "5px" to desired blur value
-  } else {
-    document.documentElement.style.setProperty('--blur-amount', '0px');
-  }
-});

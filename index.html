@@ -209,9 +209,8 @@
             <!-- Blur Button -->
             <div 
             id="blur-trigger"
-            class="gradient-button"
+            class="simple-button"
             style="position: absolute; bottom: 10px; right: 10px;">
-            <div class="button-background"></div>
             <div class="button-content">Feel Pain</div>
             </div>
           </div>
@@ -236,13 +235,11 @@
           </div>
           <!-- Audio File -->
           <audio id="pain-audio" src="./assets/pain.mp3"></audio>
-          
-
         </div>
 
 
-        
-       
+
+
         <!-- JavaScript -->
         <script>
           // Typing effect
@@ -301,22 +298,37 @@
 
           observer.observe(typingText);
 
-          // Audio playback
           const playAudio = () => {
-            const audio = document.getElementById('pain-audio');
-            if (audio) {
-              audio.play()
-                .catch(err => {
-                  console.error('Audio play failed:', err);
-                  alert('Audio playback blocked. Please tap to allow.');
-                });
-            }
+          const audio = document.getElementById('pain-audio');
+          if (audio) {
+            audio.play()
+              .catch(err => {
+                console.error('Audio play failed:', err);
+                alert('Audio playback blocked. Please tap to allow.');
+              });
+          }
           };
 
-          // Event listener for audio
-          const audioTrigger = document.getElementById('audio-trigger');
-          audioTrigger.addEventListener('click', playAudio);
-        </script>
+        const toggleBlur = () => {
+          const body = document.body; // Выбираем весь контент страницы
+          if (body) {
+            const isBlurred = body.classList.toggle('blurred'); // Переключение класса
+            document.documentElement.style.setProperty(
+              '--blur-amount',
+              isBlurred ? '5px' : '0px' // Установка уровня размытия
+            );
+            console.log(body.classList); // Для отладки
+          } else {
+            console.error('Body element not found.');
+          }
+        };
+
+        const blurTrigger = document.getElementById('blur-trigger');
+        blurTrigger.addEventListener('click', () => {
+          playAudio();
+          toggleBlur();
+        });
+        </script> 
 
 
 
