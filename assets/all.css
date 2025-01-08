@@ -291,36 +291,52 @@ body {
   
 
   /* FROSTED GLASS */
-  .frosted-glass {
-    max-width: 700px;
-    /* width: 300px; */
-    height: 200px;
-    display: flex;
-    flex-direction: column; /* Вертикальное расположение */
-    align-items: center;    /* Центрация по горизонтали */
-    justify-content: center; /* Центрация по вертикали */
-    background: hwb(260 4% 64% / 0.212);
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: rgb(255, 255, 255);
-    font-family: PP Neue Corp Wide, sans-serif;
-    font-size: 16px;
-    font-weight: 800;
-    padding: 20px;
-
-    /* Центрирование */
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+/* Контейнер для всех полупрозрачных блоков */
+.frosted-container {
+  width: var(--width, 800px); /* Использование переменной с дефолтным значением */
+  position: absolute;
+  top: 50%; /* Центрация по вертикали */
+  left: 50%; /* Центрация по горизонтали */
+  transform: translate(-50%, -50%); /* Перенос в центр слоя */
+  display: flex;
+  flex-wrap: wrap; /* Перенос блоков при нехватке места */
+  justify-content: center; /* Центрирование по горизонтали */
+  gap: 20px; /* Отступ между блоками */
+  align-items: flex-start; /* Избегаем зависимости по высоте */
 }
+
+/* Полупрозрачный блок */
+.frosted-glass {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: hwb(260 4% 64% / 0.212);
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgb(255, 255, 255);
+  font-family: PP Neue Corp Wide, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  text-align: center;
+  padding: 20px;
+  width: var(--width, 300px); /* Использование переменной */
+  height: auto; /* Высота автоматически под содержимое */
+  min-height: 100px; /* Более высокая минимальная высота для гармонии */
+}
+
+/* Отступ снизу для текста */
+.frosted-glass .text {
+  margin-bottom: 15px; /* Отступ снизу */
+  flex-direction: column;
+  text-align: center;  /* Центрирует текст по горизонтали */
+}
+
+ 
+
 
 /* skills-container */
 .skills-container {
@@ -409,18 +425,12 @@ body {
 }
 
 .text {
-  margin-bottom: 0px; /* Отступ между текстом и иконками */
-  display: block;
-  margin-top: 20px;
-  margin-left: -30px;
   font-family: PP Neue Corp Wide, sans-serif;
-  font-size: 20px;
+  font-size: 15px;
   color: hsl(0, 0%, 100%);
   text-transform: uppercase;
-  letter-spacing: 1.5px; /* Увеличенный межбуквенный интервал */
-  white-space: nowrap;
-  /* opacity: .25; */
-  /* animation: pulse 2s linear alternate infinite; */
+  letter-spacing: 1.5px;
+  margin-bottom: 15px; /* Отступ снизу */
 }
 
 /* @keyframes pulse {
@@ -463,3 +473,10 @@ body {
 }
 
  
+/* Слой параллакса */
+.parallax-layer {
+  position: relative; /* Контекст для дочерних элементов */
+  width: 100%; /* Ширина слоя */
+  height: 100vh; /* Высота слоя */
+  overflow: hidden; /* Обрезка элементов за пределами слоя */
+}
