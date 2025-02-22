@@ -145,3 +145,145 @@ window.addEventListener('DOMContentLoaded', async function() {
   });
 });
  
+
+///////////////////////// text animation
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   const textElement = document.getElementById("typing-textw");
+
+//   const originalText = textElement.textContent
+//       .replace(/\s*\n\s*/g, "\n") // Убираем лишние пробелы вокруг переносов строк
+//       .trim(); // Убираем пробелы в начале и в конце
+
+//   textElement.textContent = ""; // Очищаем текст
+//   textElement.style.minHeight = textElement.offsetHeight + "px"; // Фиксируем начальную высоту
+
+//   let charIndex = 0;
+
+//   function typeCharacter() {
+//       if (charIndex < originalText.length) {
+//           const currentChar = originalText[charIndex];
+
+//           if (currentChar === "\n") {
+//               textElement.appendChild(document.createElement("br")); // Добавляем перенос строки
+//               textElement.appendChild(document.createElement("br"));
+//           } else {
+//               const charSpan = document.createElement("span");
+//               charSpan.textContent = currentChar;
+//               charSpan.classList.add("fade-in-letter");
+//               charSpan.style.display = "inline"; // Гарантируем, что символы не смещаются
+//               textElement.appendChild(charSpan);
+//           }
+
+//           charIndex++;
+//           setTimeout(typeCharacter, 110);
+//       }
+//   }
+
+//   typeCharacter();
+// });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const textElement = document.getElementById("typing-textw");
+  const startButton = document.getElementById("startButton"); 
+  let originalText = textElement.textContent.replace(/\s*\n\s*/g, "\n").trim();
+  
+  textElement.textContent = "";
+  textElement.style.minHeight = textElement.offsetHeight + "px";
+  
+  let charIndex = 0;
+  let audioStarted = false;
+  let typingStarted = false;
+  
+  // Создаем аудио
+  const audio = new Audio("assets/audio/pain.mp3");
+  audio.volume = 0.7;
+
+  // Обрабатываем "pausa"
+  originalText = originalText.replace(/pausa/g, "⏸");
+
+  function typeCharacter() {
+      if (charIndex < originalText.length) {
+          const currentChar = originalText[charIndex];
+
+          if (currentChar === "⏸") {
+              charIndex++; // Пропускаем символ паузы
+              setTimeout(typeCharacter, 800); // Делаем паузу 1 секунда
+              return;
+          }
+
+          if (currentChar === "\n") {
+              textElement.appendChild(document.createElement("br"));
+              textElement.appendChild(document.createElement("br"));
+          } else {
+              const charSpan = document.createElement("span");
+              charSpan.textContent = currentChar;
+              charSpan.classList.add("fade-in-letter");
+              charSpan.style.display = "inline";
+              textElement.appendChild(charSpan);
+          }
+          charIndex++;
+          setTimeout(typeCharacter, 90);
+      } else {
+          setTimeout(showGif, 1000);
+      }
+  }
+
+  function startAudio() {
+      if (!audioStarted) {
+          audio.play().catch(err => console.warn("Ошибка воспроизведения аудио:", err));
+          audioStarted = true;
+      }
+  }
+
+  function showGif() {
+      const gifContainer = document.createElement("div");
+      gifContainer.id = "gif-container";
+      gifContainer.innerHTML = `
+          <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif" 
+               alt="GIF">
+      `;
+      gifContainer.style.position = "fixed";
+      gifContainer.style.top = "0";
+      gifContainer.style.left = "0";
+      gifContainer.style.width = "100vw";
+      gifContainer.style.height = "100vh";
+      gifContainer.style.zIndex = "1001";
+      gifContainer.style.opacity = "0";
+      gifContainer.style.transition = "opacity 1s ease-in-out";
+
+      document.body.appendChild(gifContainer);
+      setTimeout(() => {
+          gifContainer.style.opacity = "1";
+      }, 100);
+      setTimeout(() => {
+          fadeOutGif(gifContainer);
+      }, 1800);
+  }
+
+  function fadeOutGif(gifContainer) {
+      gifContainer.style.opacity = "0";
+      setTimeout(() => {
+          gifContainer.remove();
+          restorePage();
+      }, 4000);
+  }
+
+  function restorePage() {
+      document.body.classList.remove("fade-out");
+      document.body.style.opacity = "1";
+  }
+
+  function startAll() {
+      if (!typingStarted) {
+          typingStarted = true;
+          startButton.style.display = "none"; // Убираем кнопку
+          textElement.style.opacity = "1";
+          startAudio();
+          typeCharacter();
+      }
+  }
+
+  // Слушаем нажатие кнопки
+  startButton.addEventListener("click", startAll);
+});

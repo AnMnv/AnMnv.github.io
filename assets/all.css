@@ -293,20 +293,21 @@ body {
   /* FROSTED GLASS */
 /* Контейнер для всех полупрозрачных блоков */
 .frosted-container {
-  width: var(--width, 800px); /* Использование переменной с дефолтным значением */
+  width: var(--width, 800px);
   position: absolute;
-  top: 50%; /* Центрация по вертикали */
-  left: 50%; /* Центрация по горизонтали */
-  transform: translate(-50%, -50%); /* Перенос в центр слоя */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
-  flex-wrap: wrap; /* Перенос блоков при нехватке места */
-  justify-content: center; /* Центрирование по горизонтали */
-  gap: 20px; /* Отступ между блоками */
-  align-items: flex-start; /* Избегаем зависимости по высоте */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  align-items: flex-start;
 }
 
 /* Полупрозрачный блок */
 .frosted-glass {
+  z-index: 10; /* Выше других элементов */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -317,15 +318,17 @@ body {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255); /* Убедитесь, что текст белый */
   font-family: PP Neue Corp Wide, sans-serif;
   font-size: 16px;
   font-weight: 800;
   text-align: center;
   padding: 20px;
-  width: var(--width, 300px); /* Использование переменной */
-  height: auto; /* Высота автоматически под содержимое */
-  min-height: 100px; /* Более высокая минимальная высота для гармонии */
+  width: var(--width, 300px);
+  height: var(--height); /* Применяем высоту */
+  min-height: 100px;
+  min-width: 50px;
+  overflow: visible; /* Убедитесь, что нет обрезания */
 }
 
 /* Отступ снизу для текста */
@@ -479,4 +482,120 @@ body {
   width: 100%; /* Ширина слоя */
   height: 100vh; /* Высота слоя */
   overflow: hidden; /* Обрезка элементов за пределами слоя */
+}
+
+
+/* text-animation  */
+/* Выравнивание текста по левому краю */
+
+/* Выравнивание текста по левому краю */
+#typing-textw {
+  text-align: left; /* Выравниваем текст по левому краю */
+  white-space: pre-wrap; /* Сохраняем переносы строк */
+  line-height: 1.6;
+  font-family: monospace;
+  min-height: 200px; /* Фиксируем минимальную высоту */
+  display: block;
+  width: 100%; /* Занимает всю ширину родительского контейнера */
+  margin-top: 30px; /* Отступ сверху */
+}
+
+
+.fade-in-letter {
+  opacity: 0;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* Ключевые кадры для анимации */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+ 
+
+/* Потускание страницы */
+/* Потускание страницы (кроме GIF) */
+/* Потускание страницы (кроме GIF) */
+body.fade-out *:not(#gif-container):not(#gif-container img) {
+  animation: fadeToBlack 2s ease forwards;
+}
+
+/* Ключевые кадры для потускания */
+@keyframes fadeToBlack {
+  0% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+      background-color: black;
+  }
+}
+
+/* Стили для GIF на весь экран */
+#gif-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  background-color: black;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+#gif-container img {
+  width: 100%;  /* Растягиваем на весь экран */
+  height: 100%;
+  object-fit: cover; /* Масштабируем без искажений */
+}
+
+
+
+/*/////////////////////////////////////////*/
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(72, 255, 156, 0.5), 0 0 10px rgba(72, 255, 156, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(72, 255, 156, 0.8), 0 0 30px rgba(72, 255, 156, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(72, 255, 156, 0.5), 0 0 10px rgba(72, 255, 156, 0.3);
+  }
+}
+
+.start-button {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  background: linear-gradient(145deg, #3a6b48, #2b5035);
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  animation: glow 1.5s infinite alternate ease-in-out;
+}
+
+.start-button:hover {
+  background: linear-gradient(145deg, #4e8a5b, #3a6b48);
+  transform: scale(1.05);
+}
+
+.start-button:active {
+  transform: scale(0.98);
 }
