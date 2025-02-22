@@ -80,20 +80,6 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* body {
   background: radial-gradient(
     ellipse at center,
@@ -1358,7 +1344,6 @@ footer ul li a.active {
 }
 
 #button-top::after {
-  /* content: "\f077"; */
   font-family: FontAwesome;
   font-weight: normal;
   font-style: normal;
