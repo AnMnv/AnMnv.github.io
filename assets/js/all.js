@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           if (currentChar === "⏸") {
               charIndex++; // Пропускаем символ паузы
-              setTimeout(typeCharacter, 800); // Делаем паузу 1 секунда
+              setTimeout(typeCharacter, 950); // Делаем паузу 1 секунда
               return;
           }
 
