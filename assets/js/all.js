@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           if (currentChar === "⏸") {
               charIndex++; // Пропускаем символ паузы
-              setTimeout(typeCharacter, 950); // Делаем паузу 1 секунда
+              setTimeout(typeCharacter, 800); // Делаем паузу 1 секунда
               return;
           }
 
@@ -225,7 +225,7 @@ document.addEventListener("DOMContentLoaded", function () {
           charIndex++;
           setTimeout(typeCharacter, 90);
       } else {
-          setTimeout(showGif, 1000);
+          setTimeout(showGif, 1200);
       }
   }
 
@@ -235,12 +235,13 @@ document.addEventListener("DOMContentLoaded", function () {
           audioStarted = true;
       }
   }
+//          <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif" alt="GIF">
 
   function showGif() {
       const gifContainer = document.createElement("div");
       gifContainer.id = "gif-container";
       gifContainer.innerHTML = `
-          <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif" 
+          <img src="https://i.imgur.com/HTdjEJU.gif" 
                alt="GIF">
       `;
       gifContainer.style.position = "fixed";
@@ -266,12 +267,17 @@ document.addEventListener("DOMContentLoaded", function () {
       setTimeout(() => {
           gifContainer.remove();
           restorePage();
-      }, 4000);
+      }, 1500);
   }
 
   function restorePage() {
-      document.body.classList.remove("fade-out");
-      document.body.style.opacity = "1";
+    document.body.classList.remove("fade-out");
+    document.body.style.opacity = "1";
+  
+    // Показываем слой с изображением после исчезновения GIF
+    setTimeout(() => {
+        document.querySelector('img[data-parallax-layer="444"]').style.opacity = "1";
+    }, 50);
   }
 
   function startAll() {
@@ -287,3 +293,5 @@ document.addEventListener("DOMContentLoaded", function () {
   // Слушаем нажатие кнопки
   startButton.addEventListener("click", startAll);
 });
+
+
