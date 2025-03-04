@@ -605,3 +605,78 @@ body.fade-out *:not(#gif-container):not(#gif-container img) {
 .start-button:active {
   transform: scale(0.98);
 }
+
+
+
+
+.button-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.control-button {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.control-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.hidden-layer {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 2000;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.typing-text {
+  font-size: 18px;
+  color: white;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  display: block;
+  opacity: 1;
+  min-height: 120px;
+  padding: 10px;
+}
+
+
+.hidden {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  pointer-events: none;
+}
+
+.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Стили для canvas */
+.matrix-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1; /* Убедитесь, что canvas находится под другими элементами */
+}

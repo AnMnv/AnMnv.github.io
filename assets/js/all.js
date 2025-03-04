@@ -75,10 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "assets/imgs/Section_11/jungle3.png",
     "assets/imgs/Section_11/jungle4.png",
 
-    "assets/imgs/Section_6/1.png",
-    "assets/imgs/Section_6/2.png",
-    "assets/imgs/Section_6/3.png",
-    "assets/imgs/Section_6/4.png",
+
   ];
 
   images.forEach(src => {
@@ -185,113 +182,187 @@ window.addEventListener('DOMContentLoaded', async function() {
 
 document.addEventListener("DOMContentLoaded", function () {
   const textElement = document.getElementById("typing-textw");
-  const startButton = document.getElementById("startButton"); 
-  let originalText = textElement.textContent.replace(/\s*\n\s*/g, "\n").trim();
-  
-  textElement.textContent = "";
-  textElement.style.minHeight = textElement.offsetHeight + "px";
-  
-  let charIndex = 0;
-  let audioStarted = false;
-  let typingStarted = false;
-  
-  // Создаем аудио
-  const audio = new Audio("assets/audio/pain.mp3");
-  audio.volume = 0.7;
+  const startButtons = [
+      { id: 'startButton', audioSrc: 'assets/audio/pain.mp3', gifSrc: 'https://i.imgur.com/HTdjEJU.gif', parallaxLayer: '444' },
+      { id: 'startButton2', audioSrc: 'assets/audio/new_audio2.mp3', gifSrc: 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif', parallaxLayer: 'new_layer2' },
+      { id: 'startButton3', audioSrc: 'assets/audio/new_audio3.mp3', gifSrc: 'https://media.tenor.com/images/6b9f7f7f7f7f7f7f7f7f7f7f7f7f7f7f/tenor.gif', parallaxLayer: 'new_layer3' }
+  ];
 
-  // Обрабатываем "pausa"
-  originalText = originalText.replace(/pausa/g, "⏸");
+  let currentButtonIndex = -1;
 
-  function typeCharacter() {
-      if (charIndex < originalText.length) {
-          const currentChar = originalText[charIndex];
+  function setupButton(buttonId, audioSrc, gifSrc, parallaxLayer) {
+      const startButton = document.getElementById(buttonId); 
+      let originalText = '';
+      
+      textElement.textContent = "";
+      textElement.style.minHeight = textElement.offsetHeight + "px";
+      
+      let charIndex = 0;
+      let audioStarted = false;
+      let typingStarted = false;
+      
+      // Создаем аудио
+      const audio = new Audio(audioSrc);
+      audio.volume = 0.7;
 
-          if (currentChar === "⏸") {
-              charIndex++; // Пропускаем символ паузы
-              setTimeout(typeCharacter, 800); // Делаем паузу 1 секунда
-              return;
-          }
+      function typeCharacter() {
+          if (charIndex < originalText.length) {
+              const currentChar = originalText[charIndex];
 
-          if (currentChar === "\n") {
-              textElement.appendChild(document.createElement("br"));
-              textElement.appendChild(document.createElement("br"));
+              if (currentChar === "⏸") {
+                  charIndex++; // Пропускаем символ паузы
+                  setTimeout(typeCharacter, 800); // Делаем паузу 1 секунда
+                  return;
+              }
+
+              if (currentChar === "\n") {
+                  textElement.appendChild(document.createElement("br"));
+                  textElement.appendChild(document.createElement("br"));
+              } else {
+                  const charSpan = document.createElement("span");
+                  charSpan.textContent = currentChar;
+                  charSpan.classList.add("fade-in-letter");
+                  charSpan.style.display = "inline";
+                  textElement.appendChild(charSpan);
+              }
+              charIndex++;
+              setTimeout(typeCharacter, 90);
           } else {
-              const charSpan = document.createElement("span");
-              charSpan.textContent = currentChar;
-              charSpan.classList.add("fade-in-letter");
-              charSpan.style.display = "inline";
-              textElement.appendChild(charSpan);
+              setTimeout(showGif, 1200);
           }
-          charIndex++;
-          setTimeout(typeCharacter, 90);
-      } else {
-          setTimeout(showGif, 1200);
       }
-  }
 
-  function startAudio() {
-      if (!audioStarted) {
-          audio.play().catch(err => console.warn("Ошибка воспроизведения аудио:", err));
-          audioStarted = true;
+      function startAudio() {
+          if (!audioStarted) {
+              audio.play().catch(err => console.warn("Ошибка воспроизведения аудио:", err));
+              audioStarted = true;
+          }
       }
-  }
-//          <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif" alt="GIF">
 
-  function showGif() {
-      const gifContainer = document.createElement("div");
-      gifContainer.id = "gif-container";
-      gifContainer.innerHTML = `
-          <img src="https://i.imgur.com/HTdjEJU.gif" 
-               alt="GIF">
-      `;
-      gifContainer.style.position = "fixed";
-      gifContainer.style.top = "0";
-      gifContainer.style.left = "0";
-      gifContainer.style.width = "100vw";
-      gifContainer.style.height = "100vh";
-      gifContainer.style.zIndex = "1001";
-      gifContainer.style.opacity = "0";
-      gifContainer.style.transition = "opacity 1s ease-in-out";
+      function showGif() {
+          const gifContainer = document.createElement("div");
+          gifContainer.id = "gif-container";
+          gifContainer.innerHTML = `
+              <img src="${gifSrc}" 
+                   alt="GIF">
+          `;
+          gifContainer.style.position = "fixed";
+          gifContainer.style.top = "0";
+          gifContainer.style.left = "0";
+          gifContainer.style.width = "100vw";
+          gifContainer.style.height = "100vh";
+          gifContainer.style.zIndex = "1001";
+          gifContainer.style.opacity = "0";
+          gifContainer.style.transition = "opacity 1s ease-in-out";
 
-      document.body.appendChild(gifContainer);
-      setTimeout(() => {
-          gifContainer.style.opacity = "1";
-      }, 100);
-      setTimeout(() => {
-          fadeOutGif(gifContainer);
-      }, 1800);
-  }
-
-  function fadeOutGif(gifContainer) {
-      gifContainer.style.opacity = "0";
-      setTimeout(() => {
-          gifContainer.remove();
-          restorePage();
-      }, 1500);
-  }
-
-  function restorePage() {
-    document.body.classList.remove("fade-out");
-    document.body.style.opacity = "1";
-  
-    // Показываем слой с изображением после исчезновения GIF
-    setTimeout(() => {
-        document.querySelector('img[data-parallax-layer="444"]').style.opacity = "1";
-    }, 50);
-  }
-
-  function startAll() {
-      if (!typingStarted) {
-          typingStarted = true;
-          startButton.style.display = "none"; // Убираем кнопку
-          textElement.style.opacity = "1";
-          startAudio();
-          typeCharacter();
+          document.body.appendChild(gifContainer);
+          setTimeout(() => {
+              gifContainer.style.opacity = "1";
+          }, 100);
+          setTimeout(() => {
+              fadeOutGif(gifContainer);
+          }, 1800);
       }
+
+      function fadeOutGif(gifContainer) {
+          gifContainer.style.opacity = "0";
+          setTimeout(() => {
+              gifContainer.remove();
+              restorePage();
+          }, 1500);
+      }
+
+      function restorePage() {
+          document.body.classList.remove("fade-out");
+          document.body.style.opacity = "1";
+          
+          // Показываем слой с изображением после исчезновения GIF
+          setTimeout(() => {
+              document.querySelector(`img[data-parallax-layer="${parallaxLayer}"]`).style.opacity = "1";
+          }, 50);
+      }
+
+      function startAll(text) {
+          if (!typingStarted) {
+              typingStarted = true;
+              startButton.style.display = "none"; // Убираем кнопку
+              textElement.style.opacity = "1";
+              originalText = text.replace(/\s*\n\s*/g, "\n").trim();
+              originalText = originalText.replace(/pausa/g, "⏸");
+              charIndex = 0;
+              audioStarted = false;
+              textElement.innerHTML = ''; // Очищаем текст перед началом нового процесса
+              startAudio();
+              typeCharacter();
+          }
+      }
+
+      // Слушаем нажатие кнопки
+      startButton.addEventListener("click", function() {
+          currentButtonIndex = startButtons.findIndex(btn => btn.id === buttonId);
+          startAll(startButtons[currentButtonIndex].text);
+      });
   }
 
-  // Слушаем нажатие кнопки
-  startButton.addEventListener("click", startAll);
+  // Настройка первой кнопки (оригинальная)
+  setupButton('startButton', 'assets/audio/pain.mp3', 'https://i.imgur.com/HTdjEJU.gif', '444');
+  startButtons[0].text = `Feel Pain. Accept Pain. And Know Pain. pausa
+                          Those Who Do Not Know Pain, Will Never Understand True Peace. 
+                          And Now... pausa`;
+
+  // Настройка второй кнопки
+  setupButton('startButton2', 'assets/audio/new_audio2.mp3', 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif', 'new_layer2');
+  startButtons[1].text = `New Text for Button 2... pausa`;
+
+  // Настройка третьей кнопки
+  setupButton('startButton3', 'assets/audio/new_audio3.mp3', 'https://i.imgur.com/Ga2mPSq.gif', 'new_layer3');
+  startButtons[2].text = `New Text for Button 3... pausa`;
 });
+
+
+
+
+// JavaScript для Matrix Rain Effect
+const canvas = document.getElementById('matrixCanvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789@#$%^&*()(* ^ ω ‾́ )(ﾉ´ヮ)ﾉ*: ･ﾟ(๑˘︶˘๑)( ˙꒳​˙ )(´･ᴗ･ )(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧';
+const fontSize = 16;
+const columns = canvas.width / fontSize;
+
+const drops = [];
+for (let i = 0; i < columns; i++) {
+  drops[i] = Math.random() * canvas.height;
+}
+
+function draw() {
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = '#0F0'; // Зеленый цвет для символов
+  ctx.font = `${fontSize}px monospace`;
+
+  for (let i = 0; i < drops.length; i++) {
+    const text = characters[Math.floor(Math.random() * characters.length)];
+    ctx.fillText(text, i * fontSize, drops[i]);
+
+    if (drops[i] > canvas.height || Math.random() > 1.5) {
+      drops[i] = 0;
+    }
+    drops[i] += fontSize * 0.15; // Скорость падения
+  }
+
+  requestAnimationFrame(draw);
+}
+
+draw();
 
 
