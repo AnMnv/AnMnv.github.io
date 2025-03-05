@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const textElement = document.getElementById("typing-textw");
   const startButtons = [
       { id: 'startButton', audioSrc: 'assets/audio/pain.mp3', gifSrc: 'https://i.imgur.com/HTdjEJU.gif', parallaxLayer: '444' },
-      { id: 'startButton2', audioSrc: 'assets/audio/new_audio2.mp3', gifSrc: 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif', parallaxLayer: 'new_layer2' },
+      { id: 'startButton2', audioSrc: 'assets/audio/sasuke_audio.mp3', gifSrc: 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif', parallaxLayer: '555' },
       { id: 'startButton3', audioSrc: 'assets/audio/new_audio3.mp3', gifSrc: 'https://media.tenor.com/images/6b9f7f7f7f7f7f7f7f7f7f7f7f7f7f7f/tenor.gif', parallaxLayer: 'new_layer3' }
   ];
 
@@ -228,7 +228,11 @@ document.addEventListener("DOMContentLoaded", function () {
               charIndex++;
               setTimeout(typeCharacter, 90);
           } else {
-              setTimeout(showGif, 1200);
+              if (buttonId === 'startButton2') {
+                  showGifForButton2(); // Для второй кнопки показываем GIF сразу
+              } else {
+                  setTimeout(showGif, 1200); // Для остальных кнопок
+              }
           }
       }
 
@@ -262,6 +266,32 @@ document.addEventListener("DOMContentLoaded", function () {
           setTimeout(() => {
               fadeOutGif(gifContainer);
           }, 1800);
+      }
+
+      function showGifForButton2() {
+          // Для второй кнопки показываем GIF сразу, без задержки
+          const gifContainer = document.createElement("div");
+          gifContainer.id = "gif-container";
+          gifContainer.innerHTML = `
+              <img src="${gifSrc}" 
+                   alt="GIF">
+          `;
+          gifContainer.style.position = "fixed";
+          gifContainer.style.top = "0";
+          gifContainer.style.left = "0";
+          gifContainer.style.width = "100vw";
+          gifContainer.style.height = "100vh";
+          gifContainer.style.zIndex = "1001";
+          gifContainer.style.opacity = "0";
+          gifContainer.style.transition = "opacity 0.5s ease-in-out"; // Меньше времени для плавности
+
+          document.body.appendChild(gifContainer);
+          setTimeout(() => {
+              gifContainer.style.opacity = "1"; // GIF появляется почти сразу
+          }, 50); // Появление через 50ms после завершения текста
+          setTimeout(() => {
+              fadeOutGif(gifContainer);
+          }, 1500); // GIF исчезает через 1.5 секунды
       }
 
       function fadeOutGif(gifContainer) {
@@ -304,6 +334,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
+
   // Настройка первой кнопки (оригинальная)
   setupButton('startButton', 'assets/audio/pain.mp3', 'https://i.imgur.com/HTdjEJU.gif', '444');
   startButtons[0].text = `Feel Pain. Accept Pain. And Know Pain. pausa
@@ -311,8 +342,9 @@ document.addEventListener("DOMContentLoaded", function () {
                           And Now... pausa`;
 
   // Настройка второй кнопки
-  setupButton('startButton2', 'assets/audio/new_audio2.mp3', 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif', 'new_layer2');
-  startButtons[1].text = `New Text for Button 2... pausa`;
+  setupButton('startButton2', 'assets/audio/sasuke_audio.mp3', 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif', '555');
+  startButtons[1].text = `pausa pausa 
+  These eyes, see darkness clearly...`;
 
   // Настройка третьей кнопки
   setupButton('startButton3', 'assets/audio/new_audio3.mp3', 'https://i.imgur.com/Ga2mPSq.gif', 'new_layer3');
@@ -344,7 +376,7 @@ for (let i = 0; i < columns; i++) {
 }
 
 function draw() {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+  ctx.fillStyle = 'hsla(0, 0.00%, 0.00%, 0.05)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.fillStyle = '#0F0'; // Зеленый цвет для символов
@@ -366,3 +398,23 @@ function draw() {
 draw();
 
 
+ 
+document.querySelectorAll('.start-button').forEach(button => {
+  // Устанавливаем изображение фоном кнопки
+  const img = button.getAttribute('data-img');
+  if (img) {
+      button.style.backgroundImage = `url(${img})`;
+  }
+
+  // Устанавливаем стартовую позицию
+  const top = button.getAttribute('data-top') || '50%';
+  const left = button.getAttribute('data-left') || '50%';
+  button.style.top = top;
+  button.style.left = left;
+
+  // Добавляем плавное исчезновение при клике
+  button.addEventListener('click', () => {
+      button.style.opacity = '0'; /* Исчезает */
+      setTimeout(() => button.style.display = 'none', 500); /* Полностью убираем */
+  });
+});

@@ -201,10 +201,12 @@ body {
 }
 
 
-  .parallax__layer-img[data-parallax-layer="444"] {
+.parallax__layer-img[data-parallax-layer="444"],
+.parallax__layer-img[data-parallax-layer="555"] {
     opacity: 0;
     transition: opacity 1.5s ease-in-out;
-  }
+}
+
 
 
   .parallax__layer-img {
@@ -569,18 +571,63 @@ body.fade-out *:not(#gif-container):not(#gif-container img) {
 
 /*/////////////////////////////////////////*/
 
-@keyframes glow {
-  0% {
-    box-shadow: 0 0 5px rgba(72, 255, 156, 0.5), 0 0 10px rgba(72, 255, 156, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(72, 255, 156, 0.8), 0 0 30px rgba(72, 255, 156, 0.5);
-  }
-  100% {
-    box-shadow: 0 0 5px rgba(72, 255, 156, 0.5), 0 0 10px rgba(72, 255, 156, 0.3);
-  }
+@keyframes glowButton1 {
+  0% { box-shadow: 0 0 10px rgba(255, 165, 0, 0.6); }  /* Оранжевый цвет */
+  50% { box-shadow: 0 0 20px rgba(255, 165, 0, 1); }   /* Яркое оранжевое свечение */
+  100% { box-shadow: 0 0 10px rgba(255, 165, 0, 0.6); } /* Слабое оранжевое свечение */
 }
 
+
+@keyframes glowButton2 {
+  0% { box-shadow: 0 0 10px rgba(148, 0, 211, 0.6); }  /* Тёмно-сиреневый цвет */
+  50% { box-shadow: 0 0 20px rgba(148, 0, 211, 1); }   /* Яркое тёмно-сиреневое свечение */
+  100% { box-shadow: 0 0 10px rgba(148, 0, 211, 0.6); } /* Слабое тёмно-сиреневое свечение */
+}
+
+
+@keyframes glowButton3 {
+  0% { box-shadow: 0 0 10px rgba(72, 72, 255, 0.6); }
+  50% { box-shadow: 0 0 20px rgba(72, 72, 255, 1); }
+  100% { box-shadow: 0 0 10px rgba(72, 72, 255, 0.6); }
+}
+
+.start-button {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, opacity 0.5s ease-in-out;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.start-button.button1 {
+  animation-name: glowButton1; /* Первая кнопка */
+}
+
+.start-button.button2 {
+  animation-name: glowButton2; /* Вторая кнопка */
+  animation-delay: 0.3s; /* Задержка для второй кнопки */
+}
+
+.start-button.button3 {
+  animation-name: glowButton3; /* Третья кнопка */
+  animation-delay: 0.6s; /* Задержка для третьей кнопки */
+}
+
+
+
+/* 
 .start-button {
   font-size: 18px;
   font-weight: bold;
@@ -592,20 +639,41 @@ body.fade-out *:not(#gif-container):not(#gif-container img) {
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: all 0.3s ease-in-out;
+  transform: translate(-50%, -50%);  
+  transition: transform 2s ease-in-out;  
   position: relative;
-  animation: glow 1.5s infinite alternate ease-in-out;
-}
+  animation: glow 2s infinite alternate ease-in-out; 
+} */
 
 .start-button:hover {
-  background: linear-gradient(145deg, #4e8a5b, #3a6b48);
-  transform: scale(1.05);
+  transform: scale(1.25);
 }
 
 .start-button:active {
   transform: scale(0.98);
 }
 
+@keyframes floating {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(10px, -15px);
+  }
+  50% {
+    transform: translate(-10px, 10px);
+  }
+  75% {
+    transform: translate(15px, -10px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* .start-button {
+  animation: floating 5s infinite ease-in-out;
+} */
 
 
 
