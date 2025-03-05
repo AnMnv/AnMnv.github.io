@@ -748,3 +748,8 @@ body.fade-out *:not(#gif-container):not(#gif-container img) {
   left: 0;
   z-index: -1; /* Убедитесь, что canvas находится под другими элементами */
 }
+
+.parallax__layer-img[data-parallax-layer="555"] {
+  transform: none !important;
+  will-change: auto;
+}
