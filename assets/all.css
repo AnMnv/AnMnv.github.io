@@ -575,7 +575,7 @@ body.fade-out *:not(#gif-container):not(#gif-container img) {
 
 @keyframes glowButton1 {
   0% { box-shadow: 0 0 10px rgba(255, 165, 0, 0.6); }  /* Оранжевый цвет */
-  50% { box-shadow: 0 0 20px rgba(255, 165, 0, 1); }   /* Яркое оранжевое свечение */
+  50% { box-shadow: 0 0 25px rgba(255, 165, 0, 1); }   /* Яркое оранжевое свечение */
   100% { box-shadow: 0 0 10px rgba(255, 165, 0, 0.6); } /* Слабое оранжевое свечение */
 }
 
@@ -594,10 +594,11 @@ body.fade-out *:not(#gif-container):not(#gif-container img) {
 }
 
 @keyframes glowButton4 {
-  0% { box-shadow: 0 0 10px rgba(72, 72, 255, 0.6); }
-  50% { box-shadow: 0 0 20px rgba(72, 72, 255, 1); }
-  100% { box-shadow: 0 0 10px rgba(72, 72, 255, 0.6); }
+  0% { box-shadow: 0 0 10px rgba(190, 144, 255, 0.6); }
+  50% { box-shadow: 0 0 15px rgba(230, 230, 255, 1); }
+  100% { box-shadow: 0 0 10px rgba(190, 144, 255, 0.6); }
 }
+
 
 .start-button {
   position: absolute;
