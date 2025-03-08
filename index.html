@@ -196,8 +196,44 @@
     <!-- GREEN -->
 
 <!-- GREEN -->
-
-<section class="parallax__header">
+  <section class="parallax__header">
+    <!-- Добавляем блюр-оверлей только для данной секции -->
+    <div class="section-blur-overlay" id="sectionBlurOverlay">
+        <div class="challenge-container">
+            <h2 class="challenge-title">Unlock the section 🔒</h2>
+            <p class="challenge-description">Select all Akatsuki members to unlock content:</p>
+            
+            <div class="image-grid">
+                <div class="image-option" data-correct="true">
+                    <img src="https://i.imgur.com/CpRR2n1.jpeg" alt="Pain">
+                </div>
+                <div class="image-option" data-correct="false">
+                    <img src="https://i.imgur.com/otd9z8w.jpeg" alt="Hinata">
+                </div>
+                <div class="image-option" data-correct="false">
+                  <img src="assets/imgs/madara.jpg" alt="Madara">
+                </div>
+                <div class="image-option" data-correct="true">
+                    <img src="https://i.imgur.com/ofgqd7Z.jpeg" alt="Konan">
+                </div>
+                <div class="image-option" data-correct="true">
+                  <img src="https://i.imgur.com/RkWV3DL.jpeg" alt="Itachi">
+                </div>
+                <div class="image-option" data-correct="true">
+                  <img src="https://i.imgur.com/UPUndGU.jpeg" alt="Zabuza">
+                </div>
+                <div class="image-option" data-correct="false">
+                  <img src="https://i.imgur.com/F2I7sQo.jpeg" alt="Kushina">
+                </div>
+                <div class="image-option" data-correct="false">
+                  <img src="https://i.imgur.com/CQSburw.jpeg" alt="Gaara">
+                </div>
+            </div>
+            
+            <div class="success-message" id="successMessage">Correct! The section is unlocked.</div>
+        </div>
+    </div>
+    
     <div class="parallax__visuals">
         <div class="parallax__black-line-overflow"></div>
         <div class="parallax__fade_rev"></div>
@@ -216,9 +252,6 @@
                 </div>
             </div>
              
-
-
-
             <img src="assets/imgs/Section_11/jungle3.png" loading="eager" width="800" data-parallax-layer="6" alt="" class="parallax__layer-img">
 
             <img src="assets/imgs/Section_11/jungle4.png" loading="eager" width="800" data-parallax-layer="7" alt="" class="parallax__layer-img">
@@ -228,10 +261,6 @@
             <img src="assets/imgs/Section_11/jungle5.png" loading="eager" width="800" data-parallax-layer="9" alt="" class="parallax__layer-img mirror-image">
             <img src="assets/imgs/Section_11/sasuke_layer_img.png" loading="eager" width="800" data-parallax-layer="555" alt="" class="parallax__layer-img">
             <img src="assets/imgs/Section_11/konan_obito.png" loading="eager" width="800" data-parallax-layer="999" alt="" class="parallax__layer-img">
-
-            
-
-            
         </div>
             
         <button id="startButton" class="start-button button1" 

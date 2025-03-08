@@ -186,7 +186,7 @@ window.addEventListener('DOMContentLoaded', async function() {
 document.addEventListener("DOMContentLoaded", function () {
   const textElement = document.getElementById("typing-textw");
   const startButtons = [
-      { id: 'startButton', audioSrc: 'assets/audio/pain.mp3', gifSrc: 'https://i.imgur.com/4RaR7zg.gif', parallaxLayer: '444', text: `\nFeel Pain. Accept Pain. And Know Pain. \n\n⏸Those Who Do Not Know Pain, Will Never Understand True Peace.\n\n⏸And Now...`, delays: { text: 0, audio: 0, gif: 12200, gifDuration: 6500 } },
+      { id: 'startButton', audioSrc: 'assets/audio/pain.mp3', gifSrc: 'https://i.imgur.com/4RaR7zg.gif', parallaxLayer: '444', text: `\nFeel Pain. Accept Pain. And Know Pain. \n\n⏸Those Who Do Not Know Pain, Will Never Understand True Peace.\n\n⏸And Now...`, delays: { text: 0, audio: 0, gif: 12200, gifDuration: 5800 } },
       { id: 'startButton2', audioSrc: 'assets/audio/sasuke_audio.mp3', gifSrc: 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif', parallaxLayer: '555', text: `\n\n\nThese eyes, see darkness clearly ...`, delays: { text: 0, audio: 0, gif: 1500, gifDuration: 1900 } },
       { id: 'startButton3', audioSrc: 'assets/audio/madara.mp3', gifSrc: 'https://i.imgur.com/RvjbMz2.gif', parallaxLayer: '888', text: `\n\n\nI am ... ⏸ the ghost of the Uchiha ...`, delays: { text: 0, audio: 0, gif: 4900, gifDuration: 6800 } },
       { id: 'startButton4', audioSrc: 'assets/audio/konan_obito.mp3', gifSrc: 'https://i.imgur.com/4JbSMWM.gif', parallaxLayer: '999', text: `\n\n\n光のない世界に花は枯れる `, delays: { text: 0, audio: 0, gif: 100, gifDuration: 5800 } }
@@ -363,3 +363,55 @@ document.querySelectorAll('.start-button').forEach(button => {
       setTimeout(() => button.style.display = 'none', 500); /* Полностью убираем */
   });
 });
+
+
+
+///////////////////////////////////////////////////////////////
+
+document.addEventListener('DOMContentLoaded', function() {
+  const sectionBlurOverlay = document.getElementById('sectionBlurOverlay');
+  const successMessage = document.getElementById('successMessage');
+  const imageOptions = document.querySelectorAll('.image-option');
+  
+  // Отслеживаем выбранные изображения
+  let selectedCorrect = 0;
+  const totalCorrect = document.querySelectorAll('.image-option[data-correct="true"]').length;
+  
+  // Добавляем обработчики событий для изображений
+  imageOptions.forEach(option => {
+      option.addEventListener('click', function() {
+          // Переключаем выбор
+          this.classList.toggle('selected');
+          
+          // Подсчитываем правильные выборы
+          const isCorrect = this.getAttribute('data-correct') === 'true';
+          const isSelected = this.classList.contains('selected');
+          
+          if (isCorrect && isSelected) {
+              selectedCorrect++;
+          } else if (isCorrect && !isSelected) {
+              selectedCorrect--;
+          }
+          
+          // Проверяем, выбраны ли все правильные изображения и ни одного неправильного
+          const selectedIncorrect = document.querySelectorAll('.image-option[data-correct="false"].selected').length;
+          
+          if (selectedCorrect === totalCorrect && selectedIncorrect === 0) {
+              // Показываем сообщение об успехе
+              successMessage.style.display = 'block';
+              
+              // Убираем блюр после небольшой задержки
+              setTimeout(() => {
+                  sectionBlurOverlay.style.opacity = '0';
+                  setTimeout(() => {
+                      sectionBlurOverlay.style.display = 'none';
+                  }, 500);
+              }, 1500);
+          } else {
+              // Скрываем сообщение об успехе, если оно было показано
+              successMessage.style.display = 'none';
+          }
+      });
+  });
+});
+
