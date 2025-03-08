@@ -22,7 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
       { layer: "6", yPercent: 40 },
       { layer: "7", yPercent: 30 },
       { layer: "8", yPercent: 20 },
-      { layer: "9", yPercent: 10 }
+      { layer: "9", yPercent: 10 },
+      { layer: "888", yPercent: 20 },
+      { layer: "555", yPercent: 10 }
     ];
     layers.forEach((layerObj, idx) => {
       tl.to(
@@ -183,175 +185,116 @@ window.addEventListener('DOMContentLoaded', async function() {
 document.addEventListener("DOMContentLoaded", function () {
   const textElement = document.getElementById("typing-textw");
   const startButtons = [
-      { id: 'startButton', audioSrc: 'assets/audio/pain.mp3', gifSrc: 'https://i.imgur.com/HTdjEJU.gif', parallaxLayer: '444' },
-      { id: 'startButton2', audioSrc: 'assets/audio/sasuke_audio.mp3', gifSrc: 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif', parallaxLayer: '555' },
-      { id: 'startButton3', audioSrc: 'assets/audio/new_audio3.mp3', gifSrc: 'https://media.tenor.com/images/6b9f7f7f7f7f7f7f7f7f7f7f7f7f7f7f/tenor.gif', parallaxLayer: 'new_layer3' }
+      { id: 'startButton', audioSrc: 'assets/audio/pain.mp3', gifSrc: 'https://i.imgur.com/HTdjEJU.gif', parallaxLayer: '444', text: `\nFeel Pain. Accept Pain. And Know Pain. \n\n⏸Those Who Do Not Know Pain, Will Never Understand True Peace.\n\n⏸And Now...`, delays: { text: 0, audio: 0, gif: 11200, gifDuration: 1500 } },
+      { id: 'startButton2', audioSrc: 'assets/audio/sasuke_audio.mp3', gifSrc: 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif', parallaxLayer: '555', text: `\n\n\nThese eyes, see darkness clearly ...`, delays: { text: 0, audio: 0, gif: 1500, gifDuration: 1900 } },
+      { id: 'startButton3', audioSrc: 'assets/audio/madara.mp3', gifSrc: 'https://i.imgur.com/RvjbMz2.gif', parallaxLayer: '888', text: `\n\n\nI am ... ⏸ the ghost of the Uchiha ...`, delays: { text: 0, audio: 0, gif: 4900, gifDuration: 6800 } }
   ];
 
-  let currentButtonIndex = -1;
-
-  function setupButton(buttonId, audioSrc, gifSrc, parallaxLayer) {
-      const startButton = document.getElementById(buttonId); 
-      let originalText = '';
+  function setupButton({ id, audioSrc, gifSrc, parallaxLayer, text, delays }) {
+      const button = document.getElementById(id);
+      if (!button) return;
       
-      textElement.textContent = "";
-      textElement.style.minHeight = textElement.offsetHeight + "px";
-      
-      let charIndex = 0;
-      let audioStarted = false;
-      let typingStarted = false;
-      
-      // Создаем аудио
       const audio = new Audio(audioSrc);
       audio.volume = 0.7;
 
-      function typeCharacter() {
-          if (charIndex < originalText.length) {
-              const currentChar = originalText[charIndex];
-
-              if (currentChar === "⏸") {
-                  charIndex++; // Пропускаем символ паузы
-                  setTimeout(typeCharacter, 800); // Делаем паузу 1 секунда
-                  return;
-              }
-
-              if (currentChar === "\n") {
-                  textElement.appendChild(document.createElement("br"));
-                  textElement.appendChild(document.createElement("br"));
-              } else {
-                  const charSpan = document.createElement("span");
-                  charSpan.textContent = currentChar;
-                  charSpan.classList.add("fade-in-letter");
-                  charSpan.style.display = "inline";
-                  textElement.appendChild(charSpan);
-              }
-              charIndex++;
-              setTimeout(typeCharacter, 90);
-          } else {
-              if (buttonId === 'startButton2') {
-                  showGifForButton2(); // Для второй кнопки показываем GIF сразу
-              } else {
-                  setTimeout(showGif, 1200); // Для остальных кнопок
-              }
-          }
-      }
-
-      function startAudio() {
-          if (!audioStarted) {
-              audio.play().catch(err => console.warn("Ошибка воспроизведения аудио:", err));
-              audioStarted = true;
-          }
-      }
-
-      function showGif() {
-          const gifContainer = document.createElement("div");
-          gifContainer.id = "gif-container";
-          gifContainer.innerHTML = `
-              <img src="${gifSrc}" 
-                   alt="GIF">
-          `;
-          gifContainer.style.position = "fixed";
-          gifContainer.style.top = "0";
-          gifContainer.style.left = "0";
-          gifContainer.style.width = "100vw";
-          gifContainer.style.height = "100vh";
-          gifContainer.style.zIndex = "1001";
-          gifContainer.style.opacity = "0";
-          gifContainer.style.transition = "opacity 1s ease-in-out";
-
-          document.body.appendChild(gifContainer);
-          setTimeout(() => {
-              gifContainer.style.opacity = "1";
-          }, 100);
-          setTimeout(() => {
-              fadeOutGif(gifContainer);
-          }, 1800);
-      }
-
-      function showGifForButton2() {
-          // Для второй кнопки показываем GIF сразу, без задержки
-          const gifContainer = document.createElement("div");
-          gifContainer.id = "gif-container";
-          gifContainer.innerHTML = `
-              <img src="${gifSrc}" 
-                   alt="GIF">
-          `;
-          gifContainer.style.position = "fixed";
-          gifContainer.style.top = "0";
-          gifContainer.style.left = "0";
-          gifContainer.style.width = "100vw";
-          gifContainer.style.height = "100vh";
-          gifContainer.style.zIndex = "1001";
-          gifContainer.style.opacity = "0";
-          gifContainer.style.transition = "opacity 0.5s ease-in-out"; // Меньше времени для плавности
-
-          document.body.appendChild(gifContainer);
-          setTimeout(() => {
-              gifContainer.style.opacity = "1"; // GIF появляется почти сразу
-          }, 50); // Появление через 50ms после завершения текста
-          setTimeout(() => {
-              fadeOutGif(gifContainer);
-          }, 1500); // GIF исчезает через 1.5 секунды
-      }
-
-      function fadeOutGif(gifContainer) {
-          gifContainer.style.opacity = "0";
-          setTimeout(() => {
-              gifContainer.remove();
-              restorePage();
-          }, 1500);
-      }
-
-      function restorePage() {
-          document.body.classList.remove("fade-out");
-          document.body.style.opacity = "1";
-          
-          // Показываем слой с изображением после исчезновения GIF
-          setTimeout(() => {
-              document.querySelector(`img[data-parallax-layer="${parallaxLayer}"]`).style.opacity = "1";
-          }, 50);
-      }
-
-      function startAll(text) {
-          if (!typingStarted) {
-              typingStarted = true;
-              startButton.style.display = "none"; // Убираем кнопку
-              textElement.style.opacity = "1";
-              originalText = text.replace(/\s*\n\s*/g, "\n").trim();
-              originalText = originalText.replace(/pausa/g, "⏸");
-              charIndex = 0;
-              audioStarted = false;
-              textElement.innerHTML = ''; // Очищаем текст перед началом нового процесса
-              startAudio();
-              typeCharacter();
-          }
-      }
-
-      // Слушаем нажатие кнопки
-      startButton.addEventListener("click", function() {
-          currentButtonIndex = startButtons.findIndex(btn => btn.id === buttonId);
-          startAll(startButtons[currentButtonIndex].text);
+      button.addEventListener("click", function () {
+          button.style.display = "none";
+          startAll(text, audio, gifSrc, parallaxLayer, delays);
       });
   }
 
+  function startAll(text, audio, gifSrc, parallaxLayer, delays) {
+      let typingStarted = false;
+      let audioStarted = false;
+      
+      function startTyping() {
+          textElement.innerHTML = "";
+          let charIndex = 0;
 
-  // Настройка первой кнопки (оригинальная)
-  setupButton('startButton', 'assets/audio/pain.mp3', 'https://i.imgur.com/HTdjEJU.gif', '444');
-  startButtons[0].text = `Feel Pain. Accept Pain. And Know Pain. pausa
-                          Those Who Do Not Know Pain, Will Never Understand True Peace. 
-                          And Now... pausa`;
+          function typeCharacter() {
+              if (charIndex < text.length) {
+                  const currentChar = text[charIndex];
+                  if (currentChar === "⏸") {
+                      charIndex++;
+                      setTimeout(typeCharacter, 800);
+                      return;
+                  }
+                  
+                  if (currentChar === "\n") {
+                      textElement.appendChild(document.createElement("br"));
+                  } else {
+                      const span = document.createElement("span");
+                      span.textContent = currentChar;
+                      span.classList.add("fade-in-letter");
+                      textElement.appendChild(span);
+                  }
+                  charIndex++;
+                  setTimeout(typeCharacter, 90);
+              }
+          }
+          typeCharacter();
+      }
 
-  // Настройка второй кнопки
-  setupButton('startButton2', 'assets/audio/sasuke_audio.mp3', 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif', '555');
-  startButtons[1].text = `pausa pausa 
-  These eyes, see darkness clearly...`;
+      setTimeout(() => { startTyping(); }, delays.text);
+      setTimeout(() => { playAudio(audio); }, delays.audio);
+      setTimeout(() => { showGif(gifSrc, parallaxLayer, delays.gifDuration); }, delays.gif);
+  }
 
-  // Настройка третьей кнопки
-  setupButton('startButton3', 'assets/audio/new_audio3.mp3', 'https://i.imgur.com/Ga2mPSq.gif', 'new_layer3');
-  startButtons[2].text = `New Text for Button 3... pausa`;
+  function playAudio(audio) {
+      audio.play().catch(err => console.warn("Ошибка воспроизведения аудио:", err));
+  }
+
+  function showGif(gifSrc, parallaxLayer, gifDuration) {
+    const gifContainer = document.createElement("div");
+    gifContainer.style.position = "fixed";
+    gifContainer.style.top = "0";
+    gifContainer.style.left = "0";
+    gifContainer.style.width = "100vw";
+    gifContainer.style.height = "100vh";
+    gifContainer.style.zIndex = "1001";
+    gifContainer.style.opacity = "0";
+    gifContainer.style.transition = "opacity 1s ease-in-out";
+    gifContainer.style.display = "flex";
+    gifContainer.style.justifyContent = "center";
+    gifContainer.style.alignItems = "center";
+    gifContainer.style.backgroundColor = "black"; // На случай, если GIF имеет прозрачные края
+
+    const gifImage = document.createElement("img");
+    gifImage.src = gifSrc;
+    gifImage.alt = "GIF";
+    gifImage.style.width = "100vw";
+    gifImage.style.height = "100vh";
+    gifImage.style.objectFit = "cover"; // Растягиваем, сохраняя пропорции
+    gifImage.style.pointerEvents = "none";
+
+    gifContainer.appendChild(gifImage);
+    document.body.appendChild(gifContainer);
+
+    setTimeout(() => { gifContainer.style.opacity = "1"; }, 100);
+    setTimeout(() => { fadeOutGif(gifContainer, parallaxLayer); }, gifDuration);
+}
+
+
+  function fadeOutGif(gifContainer, parallaxLayer) {
+      gifContainer.style.opacity = "0";
+      setTimeout(() => {
+          gifContainer.remove();
+          restorePage(parallaxLayer);
+      }, 1500);
+  }
+
+  function restorePage(parallaxLayer) {
+      document.body.style.opacity = "1";
+      const img = document.querySelector(`img[data-parallax-layer="${parallaxLayer}"]`);
+      if (img) img.style.opacity = "1";
+  }
+
+  startButtons.forEach(setupButton);
 });
 
 
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 
 
 // JavaScript для Matrix Rain Effect

@@ -200,9 +200,10 @@ body {
     left: -5%;
 }
 
-
+.parallax__layer-img[data-parallax-layer="888"],
 .parallax__layer-img[data-parallax-layer="444"],
-.parallax__layer-img[data-parallax-layer="555"] {
+.parallax__layer-img[data-parallax-layer="555"]
+ {
     opacity: 0;
     transition: opacity 1.5s ease-in-out;
 }
@@ -753,3 +754,6 @@ body.fade-out *:not(#gif-container):not(#gif-container img) {
   transform: none !important;
   will-change: auto;
 }
+
+
+
