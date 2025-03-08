@@ -24,7 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
       { layer: "8", yPercent: 20 },
       { layer: "9", yPercent: 10 },
       { layer: "888", yPercent: 20 },
-      { layer: "555", yPercent: 10 }
+      { layer: "555", yPercent: 10 },
+      { layer: "999", yPercent: 70 }
     ];
     layers.forEach((layerObj, idx) => {
       tl.to(
@@ -187,7 +188,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const startButtons = [
       { id: 'startButton', audioSrc: 'assets/audio/pain.mp3', gifSrc: 'https://i.imgur.com/4RaR7zg.gif', parallaxLayer: '444', text: `\nFeel Pain. Accept Pain. And Know Pain. \n\n⏸Those Who Do Not Know Pain, Will Never Understand True Peace.\n\n⏸And Now...`, delays: { text: 0, audio: 0, gif: 12200, gifDuration: 6500 } },
       { id: 'startButton2', audioSrc: 'assets/audio/sasuke_audio.mp3', gifSrc: 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif', parallaxLayer: '555', text: `\n\n\nThese eyes, see darkness clearly ...`, delays: { text: 0, audio: 0, gif: 1500, gifDuration: 1900 } },
-      { id: 'startButton3', audioSrc: 'assets/audio/madara.mp3', gifSrc: 'https://i.imgur.com/RvjbMz2.gif', parallaxLayer: '888', text: `\n\n\nI am ... ⏸ the ghost of the Uchiha ...`, delays: { text: 0, audio: 0, gif: 4900, gifDuration: 6800 } }
+      { id: 'startButton3', audioSrc: 'assets/audio/madara.mp3', gifSrc: 'https://i.imgur.com/RvjbMz2.gif', parallaxLayer: '888', text: `\n\n\nI am ... ⏸ the ghost of the Uchiha ...`, delays: { text: 0, audio: 0, gif: 4900, gifDuration: 6800 } },
+      { id: 'startButton4', audioSrc: 'assets/audio/konan_obito.mp3', gifSrc: 'https://i.imgur.com/4JbSMWM.gif', parallaxLayer: '999', text: `\n\n\nI am ... ⏸  `, delays: { text: 0, audio: 0, gif: 100, gifDuration: 5800 } }
   ];
 
   function setupButton({ id, audioSrc, gifSrc, parallaxLayer, text, delays }) {
