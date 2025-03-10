@@ -187,9 +187,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const textElement = document.getElementById("typing-textw");
   const startButtons = [
       { id: 'startButton', audioSrc: 'assets/audio/pain.mp3', gifSrc: 'https://i.imgur.com/4RaR7zg.gif', parallaxLayer: '444', text: `\nFeel Pain. Accept Pain. And Know Pain. \n\n⏸Those Who Do Not Know Pain, Will Never Understand True Peace.\n\n⏸And Now...`, delays: { text: 0, audio: 0, gif: 12200, gifDuration: 5800 } },
-      { id: 'startButton2', audioSrc: 'assets/audio/sasuke_audio.mp3', gifSrc: 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif', parallaxLayer: '555', text: `\n\n\nThese eyes, see darkness clearly ...`, delays: { text: 0, audio: 0, gif: 1500, gifDuration: 1900 } },
-      { id: 'startButton3', audioSrc: 'assets/audio/madara.mp3', gifSrc: 'https://i.imgur.com/RvjbMz2.gif', parallaxLayer: '888', text: `\n\n\nI am ... ⏸ the ghost of the Uchiha ...`, delays: { text: 0, audio: 0, gif: 4900, gifDuration: 6800 } },
-      { id: 'startButton4', audioSrc: 'assets/audio/konan_obito.mp3', gifSrc: 'https://i.imgur.com/4JbSMWM.gif', parallaxLayer: '999', text: `\n\n\n \t\t\t光のない世界に花は枯れる `, delays: { text: 0, audio: 0, gif: 100, gifDuration: 5800 } }
+      { id: 'startButton2', audioSrc: 'assets/audio/sasuke_audio.mp3', gifSrc: 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif', parallaxLayer: '555', text: `\n\n\n \t    These eyes, see darkness clearly ...`, delays: { text: 0, audio: 0, gif: 1500, gifDuration: 1900 } },
+      { id: 'startButton3', audioSrc: 'assets/audio/madara.mp3', gifSrc: 'https://i.imgur.com/RvjbMz2.gif', parallaxLayer: '888', text: `\n\n\n \t   I am ... ⏸ the ghost of the Uchiha ...`, delays: { text: 0, audio: 0, gif: 4900, gifDuration: 6800 } },
+      { id: 'startButton4', audioSrc: 'assets/audio/konan_obito.mp3', gifSrc: 'https://i.imgur.com/4JbSMWM.gif', parallaxLayer: '999', text: `\n\n\n \t\t   光のない世界に花は枯れる `, delays: { text: 0, audio: 0, gif: 100, gifDuration: 4900 } }
   ];
 
   function setupButton({ id, audioSrc, gifSrc, parallaxLayer, text, delays }) {
@@ -344,25 +344,25 @@ draw();
 
 
  
-document.querySelectorAll('.start-button').forEach(button => {
-  // Устанавливаем изображение фоном кнопки
-  const img = button.getAttribute('data-img');
-  if (img) {
-      button.style.backgroundImage = `url(${img})`;
-  }
+// document.querySelectorAll('.start-button').forEach(button => {
+//   // Устанавливаем изображение фоном кнопки
+//   const img = button.getAttribute('data-img');
+//   if (img) {
+//       button.style.backgroundImage = `url(${img})`;
+//   }
 
-  // Устанавливаем стартовую позицию
-  const top = button.getAttribute('data-top') || '50%';
-  const left = button.getAttribute('data-left') || '50%';
-  button.style.top = top;
-  button.style.left = left;
+//   // Устанавливаем стартовую позицию
+//   const top = button.getAttribute('data-top') || '50%';
+//   const left = button.getAttribute('data-left') || '50%';
+//   button.style.top = top;
+//   button.style.left = left;
 
-  // Добавляем плавное исчезновение при клике
-  button.addEventListener('click', () => {
-      button.style.opacity = '0'; /* Исчезает */
-      setTimeout(() => button.style.display = 'none', 500); /* Полностью убираем */
-  });
-});
+//   // Добавляем плавное исчезновение при клике
+//   button.addEventListener('click', () => {
+//       button.style.opacity = '0'; /* Исчезает */
+//       setTimeout(() => button.style.display = 'none', 500); /* Полностью убираем */
+//   });
+// });
 
 
 
@@ -438,3 +438,44 @@ window.addEventListener('load', checkDevice);
 
 // Также проверять при изменении размера окна
 window.addEventListener('resize', checkDevice);
+
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //  Hover animation
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.start-button').forEach(button => {
+    const img = button.getAttribute('data-img');
+    const gifImg = button.getAttribute('data-gifka');
+    // Get custom size if specified
+    const gifSize = button.getAttribute('data-gif-size') || 'cover';
+    
+    if (img) {
+      button.style.backgroundImage = `url(${img})`;
+      button.style.backgroundSize = 'cover';
+    }
+    
+    // Position setup
+    const top = button.getAttribute('data-top') || '50%';
+    const left = button.getAttribute('data-left') || '50%';
+    button.style.top = top;
+    button.style.left = left;
+    
+    if (gifImg) {
+      button.addEventListener('mouseenter', function() {
+        button.style.backgroundImage = `url(${gifImg})`;
+        button.style.backgroundSize = gifSize;
+      });
+      
+      button.addEventListener('mouseleave', function() {
+        button.style.backgroundImage = `url(${img})`;
+        button.style.backgroundSize = 'cover';
+      });
+    }
+    
+    // Click handler
+    button.addEventListener('click', () => {
+      button.style.opacity = '0';
+      setTimeout(() => button.style.display = 'none', 500);
+    });
+  });
+});
