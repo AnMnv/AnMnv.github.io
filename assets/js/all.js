@@ -25,7 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
       { layer: "9", yPercent: 10 },
       { layer: "888", yPercent: 20 },
       { layer: "555", yPercent: 10 },
-      { layer: "999", yPercent: 70 }
+      { layer: "999", yPercent: 70 },
+      { layer: "1000", yPercent: 30 }
     ];
     layers.forEach((layerObj, idx) => {
       tl.to(
@@ -189,7 +190,9 @@ document.addEventListener("DOMContentLoaded", function () {
       { id: 'startButton', audioSrc: 'assets/audio/pain.mp3', gifSrc: 'https://i.imgur.com/4RaR7zg.gif', parallaxLayer: '444', text: `\nFeel Pain. Accept Pain. And Know Pain. \n\n⏸Those Who Do Not Know Pain, Will Never Understand True Peace.\n\n⏸And Now...`, delays: { text: 0, audio: 0, gif: 12200, gifDuration: 5800 } },
       { id: 'startButton2', audioSrc: 'assets/audio/sasuke_audio.mp3', gifSrc: 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHhzeGtxa25nMWQ3cmpwZjdkdHphOHp3cXM0NWpmMmNmdXR1OXQ0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X4s4RRkT5F5pS/giphy.gif', parallaxLayer: '555', text: `\n\n\n \t    These eyes, see darkness clearly ...`, delays: { text: 0, audio: 0, gif: 1500, gifDuration: 1900 } },
       { id: 'startButton3', audioSrc: 'assets/audio/madara.mp3', gifSrc: 'https://i.imgur.com/RvjbMz2.gif', parallaxLayer: '888', text: `\n\n\n \t   I am ... ⏸ the ghost of the Uchiha ...`, delays: { text: 0, audio: 0, gif: 4900, gifDuration: 6800 } },
-      { id: 'startButton4', audioSrc: 'assets/audio/konan_obito.mp3', gifSrc: 'https://i.imgur.com/4JbSMWM.gif', parallaxLayer: '999', text: `\n\n\n \t\t   光のない世界に花は枯れる `, delays: { text: 0, audio: 0, gif: 100, gifDuration: 4900 } }
+      { id: 'startButton4', audioSrc: 'assets/audio/konan_obito.mp3', gifSrc: 'https://i.imgur.com/4JbSMWM.gif', parallaxLayer: '999', text: `\n\n\n \t\t   光のない世界に花は枯れる `, delays: { text: 0, audio: 0, gif: 100, gifDuration: 4900 } },
+      { id: 'startButton5', audioSrc: 'assets/audio/toji.mp3', gifSrc: 'https://i.imgur.com/e2PkD86.mp4', parallaxLayer: '1000', text: `\n\n\n \tПохоже к нунчакам прилипла какая-то фигня ... `, delays: { text: 12000, audio: 100, gif: 0, gifDuration: 12900 } },
+      { id: 'startButton6', audioSrc: 'assets/audio/itachi.mp3', gifSrc: 'https://i.imgur.com/uAA90ks.mp4', parallaxLayer: '1000', text: `\n\n\n \t\t    Sono Sharingan ... `, delays: { text: 2000, audio: 1100, gif: 1000, gifDuration: 6100 } }
   ];
 
   function setupButton({ id, audioSrc, gifSrc, parallaxLayer, text, delays }) {
@@ -201,11 +204,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       button.addEventListener("click", function () {
           button.style.display = "none";
-          startAll(text, audio, gifSrc, parallaxLayer, delays);
+          // Get video scale from button if available
+          const videoScale = button.getAttribute('data-video-scale') || 'auto';
+          startAll(text, audio, gifSrc, parallaxLayer, delays, videoScale);
       });
   }
 
-  function startAll(text, audio, gifSrc, parallaxLayer, delays) {
+  function startAll(text, audio, gifSrc, parallaxLayer, delays, videoScale = 'auto') {
       let typingStarted = false;
       let audioStarted = false;
       
@@ -239,14 +244,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
       setTimeout(() => { startTyping(); }, delays.text);
       setTimeout(() => { playAudio(audio); }, delays.audio);
-      setTimeout(() => { showGif(gifSrc, parallaxLayer, delays.gifDuration); }, delays.gif);
+      setTimeout(() => { showGif(gifSrc, parallaxLayer, delays.gifDuration, videoScale); }, delays.gif);
   }
 
   function playAudio(audio) {
       audio.play().catch(err => console.warn("Ошибка воспроизведения аудио:", err));
   }
 
-  function showGif(gifSrc, parallaxLayer, gifDuration) {
+  function showGif(gifSrc, parallaxLayer, gifDuration, videoScale = 'auto') {
     const gifContainer = document.createElement("div");
     gifContainer.style.position = "fixed";
     gifContainer.style.top = "0";
@@ -259,23 +264,70 @@ document.addEventListener("DOMContentLoaded", function () {
     gifContainer.style.display = "flex";
     gifContainer.style.justifyContent = "center";
     gifContainer.style.alignItems = "center";
-    gifContainer.style.backgroundColor = "black"; // На случай, если GIF имеет прозрачные края
+    gifContainer.style.backgroundColor = "black";
 
-    const gifImage = document.createElement("img");
-    gifImage.src = gifSrc;
-    gifImage.alt = "GIF";
-    gifImage.style.width = "100vw";
-    gifImage.style.height = "100vh";
-    gifImage.style.objectFit = "cover"; // Растягиваем, сохраняя пропорции
-    gifImage.style.pointerEvents = "none";
+    // Check if the source is a video
+    const isVideo = gifSrc.endsWith('.mp4') || gifSrc.endsWith('.webm') || gifSrc.endsWith('.mov');
+    
+    if (isVideo) {
+      const videoElement = document.createElement("video");
+      videoElement.src = gifSrc;
+      videoElement.autoplay = true;
+      videoElement.loop = true;
+      videoElement.muted = true;
+      
+      // Handle video scaling with more granular control
+      if (videoScale === 'auto') {
+        // Default auto-sizing behavior
+        videoElement.style.maxWidth = "100%";
+        videoElement.style.maxHeight = "100%";
+        videoElement.style.width = "auto";
+        videoElement.style.height = "auto";
+        videoElement.style.objectFit = "contain";
+      } else if (videoScale === 'fill') {
+        // Fill screen while maintaining aspect ratio
+        videoElement.style.width = "100%";
+        videoElement.style.height = "100%";
+        videoElement.style.objectFit = "cover";
+      } else if (videoScale === 'stretch') {
+        // Stretch to fill screen (may distort)
+        videoElement.style.width = "100%";
+        videoElement.style.height = "100%";
+        videoElement.style.objectFit = "fill";
+      } else {
+        // Custom scaling using transform instead of width/height
+        // This provides smoother scaling without stretching
+        videoElement.style.maxWidth = "100%";
+        videoElement.style.maxHeight = "100%";
+        videoElement.style.width = "auto";
+        videoElement.style.height = "auto";
+        videoElement.style.objectFit = "contain";
+        
+        // Apply scale transform for precise sizing control
+        const scale = parseFloat(videoScale) || 1.0;
+        videoElement.style.transform = `scale(${scale})`;
+      }
+      
+      videoElement.style.pointerEvents = "none";
+      
+      gifContainer.appendChild(videoElement);
+    } else {
+      const gifImage = document.createElement("img");
+      gifImage.src = gifSrc;
+      gifImage.alt = "GIF";
+      gifImage.style.width = "100vw";
+      gifImage.style.height = "100vh";
+      gifImage.style.objectFit = "cover";
+      gifImage.style.pointerEvents = "none";
+      
+      gifContainer.appendChild(gifImage);
+    }
 
-    gifContainer.appendChild(gifImage);
     document.body.appendChild(gifContainer);
 
     setTimeout(() => { gifContainer.style.opacity = "1"; }, 100);
     setTimeout(() => { fadeOutGif(gifContainer, parallaxLayer); }, gifDuration);
-}
-
+  }
 
   function fadeOutGif(gifContainer, parallaxLayer) {
       gifContainer.style.opacity = "0";
@@ -291,7 +343,98 @@ document.addEventListener("DOMContentLoaded", function () {
       if (img) img.style.opacity = "1";
   }
 
+  // Process startButtons
   startButtons.forEach(setupButton);
+  
+  // Enhanced Hover animation code with video support
+  document.querySelectorAll('.start-button').forEach(button => {
+    const img = button.getAttribute('data-img');
+    const gifImg = button.getAttribute('data-gifka');
+    // Get custom size if specified
+    const gifSize = button.getAttribute('data-gif-size') || 'cover';
+    
+    // Ensure button has rounded style if not already defined
+    button.style.borderRadius = "50%";
+    button.style.overflow = "hidden";
+    
+    if (img) {
+      // Set initial image
+      setButtonBackground(button, img, 'cover');
+    }
+    
+    // Position setup
+    const top = button.getAttribute('data-top') || '50%';
+    const left = button.getAttribute('data-left') || '50%';
+    button.style.top = top;
+    button.style.left = left;
+    
+    if (gifImg) {
+      button.addEventListener('mouseenter', function() {
+        setButtonBackground(button, gifImg, gifSize);
+      });
+      
+      button.addEventListener('mouseleave', function() {
+        setButtonBackground(button, img, 'cover');
+      });
+    }
+    
+    // Click handler
+    button.addEventListener('click', () => {
+      button.style.opacity = '0';
+      setTimeout(() => button.style.display = 'none', 500);
+    });
+  });
+  
+  // Helper function to set button background (handles both images and videos)
+  function setButtonBackground(button, source, size) {
+    // Check if it's a video
+    const isVideo = source.endsWith('.mp4') || source.endsWith('.webm') || source.endsWith('.mov');
+    
+    if (isVideo) {
+      // Remove existing background image
+      button.style.backgroundImage = 'none';
+      
+      // Remove any existing video element
+      const existingVideo = button.querySelector('video');
+      if (existingVideo) {
+        existingVideo.remove();
+      }
+      
+      // Create video element
+      const video = document.createElement('video');
+      video.src = source;
+      video.autoplay = true;
+      video.loop = true;
+      video.muted = true;
+      video.style.position = 'absolute';
+      video.style.top = '0';
+      video.style.left = '0';
+      video.style.width = '100%';
+      video.style.height = '100%';
+      video.style.objectFit = size;
+      video.style.borderRadius = '50%';
+      video.style.zIndex = '-1';
+      
+      button.appendChild(video);
+      
+      // Set button position to relative if not already
+      if (button.style.position !== 'absolute' && button.style.position !== 'fixed') {
+        button.style.position = 'relative';
+      }
+    } else {
+      // If there's a video, remove it
+      const existingVideo = button.querySelector('video');
+      if (existingVideo) {
+        existingVideo.remove();
+      }
+      
+      // Set background image
+      button.style.backgroundImage = `url(${source})`;
+      button.style.backgroundSize = size;
+      button.style.backgroundPosition = 'center';
+      button.style.backgroundRepeat = 'no-repeat';
+    }
+  }
 });
 
 

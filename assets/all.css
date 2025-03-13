@@ -203,7 +203,9 @@ body {
 .parallax__layer-img[data-parallax-layer="888"],
 .parallax__layer-img[data-parallax-layer="444"],
 .parallax__layer-img[data-parallax-layer="555"],
-.parallax__layer-img[data-parallax-layer="999"]
+.parallax__layer-img[data-parallax-layer="999"],
+.parallax__layer-img[data-parallax-layer="1000"],
+.parallax__layer-img[data-parallax-layer="1001"]
  {
     opacity: 0;
     transition: opacity 1.5s ease-in-out;
@@ -599,6 +601,17 @@ body.fade-out *:not(#gif-container):not(#gif-container img) {
   100% { box-shadow: 0 0 10px rgba(190, 144, 255, 0.6); }
 }
 
+@keyframes glowButton5 { /* Toji */
+  0% { box-shadow: 0 0 20px rgba(10, 150, 10, 1); }
+  50% { box-shadow: 0 0 10px rgb(83, 146, 83); } /* Глубокий тёмно-зелёный */
+  100% { box-shadow: 0 0 20px rgba(10, 150, 10, 1); }
+}
+
+@keyframes glowButton6 { /* Toji */
+  0% { box-shadow: 0 0 20px rgb(162, 1, 1); } /* Ярко-красный (Шаринган) */
+  50% { box-shadow: 0 0 10px rgba(143, 46, 46, 0.8); } /* Глубокий бордовый */
+  100% { box-shadow: 0 0 20px rgb(179, 1, 1); }
+}
 
 .start-button {
   position: absolute;
@@ -637,6 +650,16 @@ body.fade-out *:not(#gif-container):not(#gif-container img) {
 .start-button.button4 {
   animation-name: glowButton4; /* Третья кнопка */
   animation-delay: 0.5s; /* Задержка для третьей кнопки */
+}
+
+.start-button.button5 {
+  animation-name: glowButton5; /* Третья кнопка */
+  animation-delay: 0.8s; /* Задержка для третьей кнопки */
+}
+
+.start-button.button6 {
+  animation-name: glowButton6; /* Третья кнопка */
+  animation-delay: 0.4s; /* Задержка для третьей кнопки */
 }
 
 /* 
