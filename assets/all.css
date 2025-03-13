@@ -719,7 +719,7 @@ body.fade-out *:not(#gif-container):not(#gif-container img) {
     transform: translateX(-50%);
     display: flex;
     gap: 10px;
-    z-index: 1000;
+    z-index: 5000;
 }
 
 .control-button {
@@ -800,7 +800,7 @@ body.fade-out *:not(#gif-container):not(#gif-container img) {
   width: 100%;
   height: 100%;
   backdrop-filter: blur(10px);
-  z-index: 1000;
+  z-index: 7000;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -888,7 +888,7 @@ body.fade-out *:not(#gif-container):not(#gif-container img) {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.9); /* Более темный фон для атмосферы Акацуки */
-  z-index: 1000;
+  z-index: 7001;
   color: #ffffff; /* Мягкий пастельный текст */
   text-align: center;
   padding-top: 25vh; /* Еще выше */
