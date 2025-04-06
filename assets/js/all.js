@@ -27,7 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
       { layer: "555", yPercent: 10 },
       { layer: "999", yPercent: 40 },
       { layer: "1000", yPercent: 10 },
-      { layer: "1001", yPercent: 10 }
+      { layer: "1001", yPercent: 10 },
+      { layer: "777", yPercent: 10 }
     ];
     layers.forEach((layerObj, idx) => {
       tl.to(
@@ -193,7 +194,8 @@ document.addEventListener("DOMContentLoaded", function () {
       { id: 'startButton3', audioSrc: 'assets/audio/madara.mp3', gifSrc: 'https://i.imgur.com/RvjbMz2.gif', parallaxLayer: '888', text: `\n\n\n \t   I am ... ⏸ the ghost of the Uchiha ...`, delays: { text: 0, audio: 0, gif: 4900, gifDuration: 6800 } },
       { id: 'startButton4', audioSrc: 'assets/audio/konan_obito.mp3', gifSrc: 'https://i.imgur.com/4JbSMWM.gif', parallaxLayer: '999', text: `\n\n\n \t\t   光のない世界に花は枯れる `, delays: { text: 0, audio: 0, gif: 100, gifDuration: 4500 } },
       { id: 'startButton5', audioSrc: 'assets/audio/toji.mp3', gifSrc: 'https://i.imgur.com/e2PkD86.mp4', parallaxLayer: '1001', text: `\n\n\n \tПохоже к нунчакам прилипла какая-то фигня ... `, delays: { text: 12000, audio: 100, gif: 0, gifDuration: 12900 } },
-      { id: 'startButton6', audioSrc: 'assets/audio/itachi.mp3', gifSrc: 'https://i.imgur.com/uAA90ks.mp4', parallaxLayer: '1000', text: `\n\n\n \t\t    Sono Sharingan ... `, delays: { text: 2000, audio: 100, gif: 100, gifDuration: 6100 } }
+      { id: 'startButton6', audioSrc: 'assets/audio/itachi.mp3', gifSrc: 'https://i.imgur.com/uAA90ks.mp4', parallaxLayer: '1000', text: `\n\n\n \t\t    Sono Sharingan ... `, delays: { text: 2000, audio: 100, gif: 100, gifDuration: 6100 } },
+      { id: 'startButton7', audioSrc: 'assets/audio/SonJunWu.mp3', gifSrc: 'https://i.imgur.com/DX4M1ro.mp4', parallaxLayer: '777', text: `\n\n\n \t\t\t    Arise `, delays: { text: 0, audio: 600, gif: 1500, gifDuration: 8000 } }
   ];
 
   function setupButton({ id, audioSrc, gifSrc, parallaxLayer, text, delays }) {
