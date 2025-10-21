@@ -1,0 +1,953 @@
+/* ------- Osmo [https://osmo.supply/] ------- */
+/* Osmo UI: https://slater.app/10324/23333.css */
+
+body {
+    background-color: var(--color-neutral-900);
+    color: var(--color-light);
+    font-size: var(--size-font);
+    margin: 0;
+    padding: 0;
+  }
+  
+
+  [data-parallax-layer] {
+    will-change: transform;
+    transform: translate3d(0, 0, 0); 
+  }
+
+  .cloneable {
+    padding: var(--container-padding);
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    display: flex;
+    position: relative;
+  }
+  
+  
+  .parallax__fade {
+    --color-dark-rgb: 0, 0, 0;
+      background: linear-gradient(to top, rgba(var(--color-dark-rgb), 1) 0%, rgba(var(--color-dark-rgb), 0.738) 19%, rgba(var(--color-dark-rgb), 0.541) 34%, rgba(var(--color-dark-rgb), 0.382) 47%, rgba(var(--color-dark-rgb), 0.278) 56.5%, rgba(var(--color-dark-rgb), 0.194) 65%, rgba(var(--color-dark-rgb), 0.126) 73%, rgba(var(--color-dark-rgb), 0.075) 80.2%, rgba(var(--color-dark-rgb), 0.042) 86.1%, rgba(var(--color-dark-rgb), 0.021) 91%, rgba(var(--color-dark-rgb), 0.008) 95.2%, rgba(var(--color-dark-rgb), 0.002) 98.2%, transparent 100%);
+  }
+
+  /* .parallax__fade_rev {
+    --color-dark-rgb: 0, 0, 0;
+    background: linear-gradient(to bottom, rgba(var(--color-dark-rgb), 1) 0%, rgba(var(--color-dark-rgb), 0.738) 19%, rgba(var(--color-dark-rgb), 0.541) 34%, rgba(var(--color-dark-rgb), 0.382) 47%, rgba(var(--color-dark-rgb), 0.278) 56.5%, rgba(var(--color-dark-rgb), 0.194) 65%, rgba(var(--color-dark-rgb), 0.126) 73%, rgba(var(--color-dark-rgb), 0.075) 80.2%, rgba(var(--color-dark-rgb), 0.042) 86.1%, rgba(var(--color-dark-rgb), 0.021) 91%, rgba(var(--color-dark-rgb), 0.008) 95.2%, rgba(var(--color-dark-rgb), 0.002) 98.2%, transparent 100%);
+  } */
+  
+  .osmo-icon-svg {
+    width: 8em;
+    position: relative;
+  }
+  
+  .parallax__header {
+    z-index: 2;
+    padding: var(--section-padding) var(--container-padding);
+    justify-content: center;
+    align-items: center;
+    min-height: 100svh;
+    display: flex;
+    position: relative;
+  }
+  
+  .parallax {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .parallax__content {
+    padding: var(--section-padding) var(--container-padding);
+    justify-content: center;
+    align-items: center;
+    min-height: 100svh;
+    display: flex;
+    position: relative;
+  }
+  
+  .cover {
+    object-fit: cover;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .parallax__visuals {
+    object-fit: cover;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .parallax__placeholder {
+    z-index: 0;
+    opacity: 0;
+    object-fit: cover;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .parallax__layers {
+    object-fit: cover;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+  
+  .cover-copy {
+    object-fit: cover;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .parallax__fade {
+    z-index: 30;
+    object-fit: cover;
+    width: 100%;
+    max-width: none;
+    height: 20%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .parallax__fade_rev {
+    --color-dark-rgb: 0, 0, 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(var(--color-dark-rgb), 1) 0%,
+        rgba(var(--color-dark-rgb), 0.8) 25%,
+        rgba(var(--color-dark-rgb), 0.5) 50%,
+        rgba(var(--color-dark-rgb), 0.2) 75%,
+        transparent 100%
+    );
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    z-index: 40;
+    pointer-events: none;
+}
+
+
+
+
+
+
+
+  
+  .parallax__black-line-overflow {
+    z-index: 20;
+    background-color: var(--color-black);
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+  }
+  
+  .parallax__title {
+    pointer-events: auto;
+    text-align: center;
+    text-transform: none;
+    margin-top: 0;
+    margin-bottom: 3em;
+    margin-right: -1.2em;
+    font-family: PP Neue Corp Wide, sans-serif;
+    font-size: 8vw;
+    font-weight: 800;
+    line-height: 1;
+    position: relative;
+  }
+  
+  .parallax__radial-gradient {
+    z-index: 10;
+    background-image: radial-gradient(circle farthest-corner at 50% 50%, transparent, var(--color-black));
+    opacity: .5;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    position: fixed;
+    inset: 0;
+  }
+  
+  .parallax__layer-title {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100svh;
+    display: flex;
+    position: absolute;
+    top: -10%; /* перемещает надпись выше, ближе к верхней части */
+    left: -5%;
+}
+
+.parallax__layer-img[data-parallax-layer="888"],
+.parallax__layer-img[data-parallax-layer="444"],
+.parallax__layer-img[data-parallax-layer="555"],
+.parallax__layer-img[data-parallax-layer="999"],
+.parallax__layer-img[data-parallax-layer="1000"],
+.parallax__layer-img[data-parallax-layer="1001"],
+.parallax__layer-img[data-parallax-layer="777"]
+ {
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+
+
+  .parallax__layer-img {
+    pointer-events: none;
+    object-fit: cover;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    /* height: 117.5%; */
+    position: absolute;
+    /* top: -17.5%; */
+    left: 0;
+  }
+  
+  .parallax__layer-img.is-third {
+    top: -20%;
+  }
+  
+  @font-face {
+    font-family: 'PP Neue Corp Wide';
+    src: url('https://cdn.prod.website-files.com/671752cd4027f01b1b8f1c7f/6717e399d30a606fed425914_PPNeueCorp-WideUltrabold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  
+  
+
+  /*ss*/
+
+
+  .content {
+    display: flex;
+    align-items: center; /* Вертикальное выравнивание */
+    justify-content: space-between; /* Пространство между элементами */
+    gap: 20px; /* Расстояние между текстом и изображением */
+  }
+  
+  @media (max-width: 900px) {
+    .content {
+      flex-direction: column; /* Переход на вертикальное расположение для маленьких экранов */
+      align-items: center; /* Центровка элементов */
+    }
+  }
+  
+  .column {
+    flex: 1; /* Занимает всё доступное пространство */
+    max-width: 60%; /* Устанавливает ограничение на ширину текста */
+  }
+  
+  .img {
+    flex: 1; /* Изображение занимает оставшееся пространство */
+    max-width: 40%; /* Ограничение на ширину изображения */
+    display: flex;
+    justify-content: center; /* Центровка изображения внутри контейнера */
+  }
+  
+  .img img {
+    width: 100%; /* Адаптивное изображение */
+    max-width: 300px; /* Максимальная ширина изображения */
+    height: auto; /* Сохраняет пропорции изображения */
+  }
+  
+
+  section {
+    background: linear-gradient(
+      to bottom,
+      #000000, /* Чёрный */
+      hwb(30 0% 99%), /* Чёрный */
+      #23140a  /* Яркий оранжевый */
+    );
+    min-height: 100vh; /* Убедитесь, что градиент покрывает всю высоту экрана */
+    margin: 0;
+  }
+  
+
+
+  
+  h1, h3, h4, h5, h6 {
+    color: #FFD700; /* Золотистый цвет для заголовков */
+    margin-bottom: 20px;
+  }
+  
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+
+  /* FROSTED GLASS */
+/* Контейнер для всех полупрозрачных блоков */
+.frosted-container {
+  width: var(--width, 800px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* Полупрозрачный блок */
+.frosted-glass {
+  z-index: 10; /* Выше других элементов */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: hwb(260 4% 64% / 0.212);
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgb(255, 255, 255); /* Убедитесь, что текст белый */
+  font-family: PP Neue Corp Wide, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  text-align: center;
+  padding: 20px;
+  width: var(--width, 300px);
+  height: var(--height); /* Применяем высоту */
+  min-height: 100px;
+  min-width: 50px;
+  overflow: visible; /* Убедитесь, что нет обрезания */
+}
+
+/* Отступ снизу для текста */
+.frosted-glass .text {
+  margin-bottom: 15px; /* Отступ снизу */
+  flex-direction: column;
+  text-align: center;  /* Центрирует текст по горизонтали */
+}
+
+ 
+
+
+/* skills-container */
+.skills-container {
+  display: flex;
+  flex-wrap: wrap; /* Позволяет перенос элементов */
+  justify-content: center; /* Центрирует элементы */
+  gap: 20px; /* Увеличенный отступ между иконками */
+}
+
+.skills-container img {
+  width: 50px; /* Размер иконок */
+  height: 50px;
+  transition: transform 0.3s ease; /* Анимация при наведении */
+}
+
+.skills-container img:hover {
+  transform: scale(1.1); /* Увеличение при наведении */
+}
+
+/* ARROW  */
+.container {
+  position: fixed; /* Фиксированное положение */
+  bottom: 70px;    /* Отступ от нижнего края страницы */
+  left: 50%;       /* Выравнивание по центру */
+  transform: translateX(-50%); /* Центрирование по горизонтали */
+  width: 24px;
+  height: 24px;
+}
+
+
+.chevron {
+  position: absolute;
+  width: 48px;
+  height: 8px;
+  opacity: 0;
+  transform: scale3d(0.5, 0.5, 0.5);
+  animation: move 2s ease-out infinite;
+}
+
+.chevron:first-child {
+  animation: move 2s ease-out 1s infinite;
+}
+
+.chevron:nth-child(2) {
+  animation: move 2s ease-out 1s infinite;
+}
+
+.chevron:before,
+.chevron:after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 51%;
+  background: #fff;
+}
+
+.chevron:before {
+  left: 0;
+  transform: skew(0deg, 30deg);
+}
+
+.chevron:after {
+  right: 0;
+  width: 50%;
+  transform: skew(0deg, -30deg);
+}
+
+@keyframes move {
+  25% {
+    opacity: 1;
+
+  }
+  33% {
+    opacity: 1;
+    transform: translateY(30px);
+  }
+  67% {
+    opacity: 1;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(55px) scale3d(0.5, 0.5, 0.5);
+  }
+}
+
+.text {
+  font-family: PP Neue Corp Wide, sans-serif;
+  font-size: 15px;
+  color: hsl(0, 0%, 100%);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 15px; /* Отступ снизу */
+}
+
+/* @keyframes pulse {
+  to {
+    opacity: 1;
+  }
+} */
+
+/* Mirroo image */
+.mirror-image {
+  transform: scaleX(-1); /* Зеркальное отражение по горизонтали */
+}
+
+
+/* Repo Cards */
+.projects {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem 1rem;
+  margin-top: 600px;
+}
+
+.repo-card {
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.05);
+  border-radius: 1rem;
+  backdrop-filter: blur(1rem);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  transition: 0.5s ease;
+}
+
+.repo-card,
+.repo-card-dark {
+  position: relative;
+  box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+ 
+/* Слой параллакса */
+.parallax-layer {
+  position: relative; /* Контекст для дочерних элементов */
+  width: 100%; /* Ширина слоя */
+  height: 100vh; /* Высота слоя */
+  overflow: hidden; /* Обрезка элементов за пределами слоя */
+}
+
+
+/* text-animation  */
+/* Выравнивание текста по левому краю */
+
+/* Выравнивание текста по левому краю */
+#typing-textw {
+  text-align: left; /* Выравниваем текст по левому краю */
+  white-space: pre-wrap; /* Сохраняем переносы строк */
+  line-height: 1.6;
+  font-family: monospace;
+  min-height: 200px; /* Фиксируем минимальную высоту */
+  display: block;
+  width: 100%; /* Занимает всю ширину родительского контейнера */
+  margin-top: 30px; /* Отступ сверху */
+}
+
+
+.fade-in-letter {
+  opacity: 0;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* Ключевые кадры для анимации */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+ 
+
+/* Потускание страницы */
+/* Потускание страницы (кроме GIF) */
+/* Потускание страницы (кроме GIF) */
+body.fade-out *:not(#gif-container):not(#gif-container img) {
+  animation: fadeToBlack 2s ease forwards;
+}
+
+/* Ключевые кадры для потускания */
+@keyframes fadeToBlack {
+  0% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+      background-color: black;
+  }
+}
+
+/* Стили для GIF на весь экран */
+#gif-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  background-color: black;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+#gif-container img {
+  width: 100%;  /* Растягиваем на весь экран */
+  height: 100%;
+  object-fit: cover; /* Масштабируем без искажений */
+}
+
+
+
+/*/////////////////////////////////////////*/
+
+@keyframes glowButton1 {
+  0% { box-shadow: 0 0 10px rgba(255, 165, 0, 0.6); }  /* Оранжевый цвет */
+  50% { box-shadow: 0 0 25px rgba(255, 165, 0, 1); }   /* Яркое оранжевое свечение */
+  100% { box-shadow: 0 0 10px rgba(255, 165, 0, 0.6); } /* Слабое оранжевое свечение */
+}
+
+
+@keyframes glowButton2 {
+  0% { box-shadow: 0 0 10px rgba(148, 0, 211, 0.6); }  /* Тёмно-сиреневый цвет */
+  50% { box-shadow: 0 0 20px rgba(148, 0, 211, 1); }   /* Яркое тёмно-сиреневое свечение */
+  100% { box-shadow: 0 0 10px rgba(148, 0, 211, 0.6); } /* Слабое тёмно-сиреневое свечение */
+}
+
+
+@keyframes glowButton3 {
+  0% { box-shadow: 0 0 10px rgba(72, 72, 255, 0.6); }
+  50% { box-shadow: 0 0 20px rgba(72, 72, 255, 1); }
+  100% { box-shadow: 0 0 10px rgba(72, 72, 255, 0.6); }
+}
+
+@keyframes glowButton4 {
+  0% { box-shadow: 0 0 10px rgba(190, 144, 255, 0.6); }
+  50% { box-shadow: 0 0 15px rgba(230, 230, 255, 1); }
+  100% { box-shadow: 0 0 10px rgba(190, 144, 255, 0.6); }
+}
+
+@keyframes glowButton5 { /* Toji */
+  0% { box-shadow: 0 0 20px rgba(10, 150, 10, 1); }
+  50% { box-shadow: 0 0 10px rgb(83, 146, 83); } /* Глубокий тёмно-зелёный */
+  100% { box-shadow: 0 0 20px rgba(10, 150, 10, 1); }
+}
+
+@keyframes glowButton6 { /* Toji */
+  0% { box-shadow: 0 0 20px rgb(162, 1, 1); } /* Ярко-красный (Шаринган) */
+  50% { box-shadow: 0 0 10px rgba(143, 46, 46, 0.8); } /* Глубокий бордовый */
+  100% { box-shadow: 0 0 20px rgb(179, 1, 1); }
+}
+
+@keyframes glowButton7 { 
+  0% { box-shadow: 0 0 20px rgb(1, 85, 255); } /* Ярко-синий */
+  50% { box-shadow: 0 0 10px rgba(33, 58, 146, 0.8); } /* Глубокий синий */
+  100% { box-shadow: 0 0 20px rgb(1, 85, 255); }
+}
+
+.start-button {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, opacity 0.5s ease-in-out;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.start-button.button1 {
+  animation-name: glowButton1; /* Первая кнопка */
+}
+
+.start-button.button2 {
+  animation-name: glowButton2; /* Вторая кнопка */
+  animation-delay: 0.3s; /* Задержка для второй кнопки */
+}
+
+.start-button.button3 {
+  animation-name: glowButton3; /* Третья кнопка */
+  animation-delay: 0.6s; /* Задержка для третьей кнопки */
+}
+
+.start-button.button4 {
+  animation-name: glowButton4; /* Третья кнопка */
+  animation-delay: 0.5s; /* Задержка для третьей кнопки */
+}
+
+.start-button.button5 {
+  animation-name: glowButton5; /* Третья кнопка */
+  animation-delay: 0.8s; /* Задержка для третьей кнопки */
+}
+
+.start-button.button6 {
+  animation-name: glowButton6; /* Третья кнопка */
+  animation-delay: 0.4s; /* Задержка для третьей кнопки */
+}
+
+.start-button.button7 {
+  animation-name: glowButton7; /* Третья кнопка */
+  animation-delay: 0.4s; /* Задержка для третьей кнопки */
+}
+
+/* 
+.start-button {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  background: linear-gradient(145deg, #3a6b48, #2b5035);
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transform: translate(-50%, -50%);  
+  transition: transform 2s ease-in-out;  
+  position: relative;
+  animation: glow 2s infinite alternate ease-in-out; 
+} */
+
+.start-button:hover {
+  transform: scale(1.25);
+}
+
+.start-button:active {
+  transform: scale(0.98);
+}
+
+@keyframes floating {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(10px, -15px);
+  }
+  50% {
+    transform: translate(-10px, 10px);
+  }
+  75% {
+    transform: translate(15px, -10px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* .start-button {
+  animation: floating 5s infinite ease-in-out;
+} */
+
+
+
+.button-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 5000;
+}
+
+.control-button {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.control-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.hidden-layer {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 2000;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.typing-text {
+  font-size: 18px;
+  color: white;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  display: block;
+  opacity: 1;
+  min-height: 120px;
+  padding: 10px;
+}
+
+
+.hidden {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  pointer-events: none;
+}
+
+.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Стили для canvas */
+.matrix-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1; /* Убедитесь, что canvas находится под другими элементами */
+}
+
+.parallax__layer-img[data-parallax-layer="555"] {
+  transform: none !important;
+  will-change: auto;
+}
+
+
+
+/* Blur overlay */
+/* Блюр-оверлей только для секции */
+.section-blur-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  z-index: 7000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: all 0.5s ease;
+}
+
+/* Контейнер задания */
+.challenge-container {
+  text-align: center;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  max-width: 600px;
+}
+
+.challenge-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.challenge-description {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+/* Сетка изображений */
+/* Стиль колоночной сетки изображений */
+.image-grid {
+  column-count: 3; /* Задаем 2 колонки */
+  column-gap: 20px; /* Расстояние между колонками */
+  margin-top: 20px;
+}
+
+.image-option {
+  cursor: pointer;
+  border: 3px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 20px; /* Отступ между элементами по вертикали */
+  break-inside: avoid; /* Предотвращаем разрыв элемента между колонками */
+}
+
+.image-option img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.image-option.selected {
+  border-color: #4CAF50;
+  transform: scale(1.05);
+}
+
+/* Сообщение об успехе */
+.success-message {
+  display: none;
+  color: #4CAF50;
+  font-size: 24px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+/*   ///////////////////////////  WARNING */
+/*   ///////////////////////////  WARNING */
+#content {
+  transition: filter 0.3s ease;
+}
+
+#content.blurred {
+  filter: blur(8px);
+}
+
+#mobile-warning {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9); /* Более темный фон для атмосферы Акацуки */
+  z-index: 7001;
+  color: #ffffff; /* Мягкий пастельный текст */
+  text-align: center;
+  padding-top: 25vh; /* Еще выше */
+  backdrop-filter: blur(12px); /* Более сильный блюр */
+  animation: fadeIn 1s ease-in-out;
+}
+
+.warning-box {
+  margin: auto;
+  max-width: 75%;
+  background: linear-gradient(135deg, #3b0000, #7a0000); /* Градиент в стиле Акацуки */
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+  margin-top: -15vh; /* Еще выше */
+  border: 2px solid #ff0000;
+  animation: pulseGlow 1.5s infinite alternate;
+}
+
+h1 {
+  font-size: 26px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.rounded-gif {
+  border-radius: 15px;
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulseGlow {
+  from { box-shadow: 0 0 10px rgba(255, 0, 0, 0.6); }
+  to { box-shadow: 0 0 20px rgba(255, 0, 0, 1); }
+}
