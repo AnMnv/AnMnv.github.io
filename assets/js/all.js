@@ -19,7 +19,7 @@ function raf(time) {
 requestAnimationFrame(raf);
 
 // ==========================================
-// 2. ПАРАЛЛАКС ЭФФЕКТ
+// 2. ПАРАЛЛАКС ЭФФЕКТ (ТЕКСТ УХОДИТ ЗА ГОРЫ)
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
   const isMobile = window.innerWidth <= 768;
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-const layers = isMobile
+    const layers = isMobile
       ? [
           { layer: "1", yPercent: 10 },
           { layer: "title", yPercent: 35 }, // Текст плавно погружается за горы
@@ -48,8 +48,8 @@ const layers = isMobile
         ]
       : [
           { layer: "1", yPercent: 30 },     // Небо
-          { layer: "title", yPercent: 75 }, // Текст быстро уходит за гору
-          { layer: "2", yPercent: 25 },     // Горы движутся медленнее и накрывают надпись
+          { layer: "title", yPercent: 75 }, // Текст быстрее уходит вниз за гору
+          { layer: "2", yPercent: 25 },     // Горы накрывают надпись
           { layer: "3", yPercent: 22 },
           { layer: "4", yPercent: 18 },
           { layer: "5", yPercent: 15 },

@@ -10,24 +10,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Sawarabi+Gothic&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <div class="parallax">
         
         <!-- SECTION 1: HERO -->
         <section class="parallax__header" id="hero-section">
             <div class="parallax__visuals">
                 <div data-parallax-layers class="parallax__layers">
-                    <!-- 1. Фоновое небо (самый дальний слой) -->
+                    <!-- 1. Фоновое небо -->
                     <img src="assets/imgs/Section_1/background.f8e0a3e86fb4252623af.png" loading="eager" data-parallax-layer="1" alt="" class="parallax__layer-img layer-sky">
                     
-                    <!-- 2. СТЕКЛЯННЫЙ ТЕКСТ (НАХОДИТСЯ ЗА ГОРАМИ) -->
+                    <!-- 2. СТЕКЛЯННЫЙ ТЕКСТ-ОПТИЧЕСКАЯ ЛИНЗА (ЗА ГОРАМИ) -->
                     <div data-parallax-layer="title" class="parallax__layer-title">
-                        <h1 class="parallax__title">anmnv</h1>
+                        <h1 class="parallax__title" data-text="anmnv">anmnv</h1>
                     </div>
                     
-                    <!-- 3. Горы (перекрывают текст при скролле) -->
+                    <!-- 3. Горы (перекрывают преломляющее стекло) -->
                     <img src="assets/imgs/Section_1/mountains.png" loading="eager" data-parallax-layer="2" alt="" class="parallax__layer-img layer-mountains">
                     
-                    <!-- Остальные слои джунглей поверх -->
+                    <!-- Джунгли -->
                     <img src="assets/imgs/Section_1/logo_land.png" loading="eager" data-parallax-layer="3" alt="" class="parallax__layer-img">
                     <img src="assets/imgs/Section_1/jungle1.png" loading="lazy" data-parallax-layer="4" alt="" class="parallax__layer-img">
                     <img src="assets/imgs/Section_1/jungle2.png" loading="lazy" data-parallax-layer="5" alt="" class="parallax__layer-img">
@@ -43,7 +44,7 @@
                 <div class="chevron"></div>
                 <div class="chevron"></div>
             </div>
-        </section>
+        </section> 
 
         <!-- SECTION 2: SKILLS -->
         <section class="parallax__header" id="skills-section">
@@ -134,7 +135,6 @@
                 <div data-parallax-layers class="parallax__layers">
                     <img src="assets/imgs/1.jpg" loading="lazy" data-parallax-layer="1" alt="" class="parallax__layer-img">
                 </div>
-                <!-- Градиенты лежат ПОВЕРХ картинки, создавая идеальный переход -->
                 <div class="parallax__fade_rev"></div>
                 <div class="parallax__fade"></div>
             </div>

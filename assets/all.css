@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Sawarabi+Gothic&display=swap");
 
-/* Фирменный футуристичный шрифт */
 @font-face {
   font-family: 'PP Neue Corp Wide';
   src: url('https://cdn.prod.website-files.com/671752cd4027f01b1b8f1c7f/6717e399d30a606fed425914_PPNeueCorp-WideUltrabold.woff2') format('woff2');
@@ -32,7 +31,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ---------------- ОСНОВНАЯ СТРУКТУРА ЭКРАНОВ ---------------- */
 .parallax {
   width: 100%;
   position: relative;
@@ -72,7 +70,6 @@ body {
   transform: translate3d(0, 0, 0);
 }
 
-/* Изображения слоёв с запасом по высоте, исключающим полосы при скролле */
 .parallax__layer-img {
   position: absolute;
   top: -7.5%;
@@ -83,9 +80,9 @@ body {
   pointer-events: none;
 }
 
-/* ---------------- СЛОИ ПЕРВОЙ СЕКЦИИ И ИХ Z-INDEX ---------------- */
+/* ---------------- СЛОИ ПЕРВОЙ СЕКЦИИ И Z-INDEX ---------------- */
 .layer-sky {
-  z-index: 1; /* Небо на самом дальнем плане */
+  z-index: 1;
 }
 
 .parallax__layer-title {
@@ -96,13 +93,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 14vh; /* Позиция в чистом небе над горным хребтом */
-  z-index: 2; /* Строго перед небом, но ЗА горами */
+  padding-top: 14vh;
+  z-index: 2; /* За горами, но перед небом */
   pointer-events: none;
 }
 
 .layer-mountains {
-  z-index: 3 !important; /* Горы перекрывают текст при скролле */
+  z-index: 3 !important; /* Горы накрывают стекло при скролле */
 }
 
 .parallax__layer-img[data-parallax-layer="3"],
@@ -112,10 +109,10 @@ body {
 .parallax__layer-img[data-parallax-layer="7"],
 .parallax__layer-img[data-parallax-layer="8"],
 .parallax__layer-img[data-parallax-layer="9"] {
-  z-index: 4; /* Все джунгли переднего плана */
+  z-index: 4;
 }
 
-/* ---------------- НАСТОЯЩЕЕ ОПТИЧЕСКОЕ 3D СТЕКЛО (anmnv) ---------------- */
+/* ---------------- ОПТИЧЕСКАЯ СТЕКЛЯННАЯ ЛИНЗА anmnv ---------------- */
 .parallax__title {
   position: relative;
   display: inline-block;
@@ -126,40 +123,38 @@ body {
   letter-spacing: -2px;
   user-select: none;
 
-  /* 1. Физическая прозрачность: тело буквы пропускает 85-90% фонового света */
-  background: linear-gradient(
-    140deg,
-    rgba(255, 255, 255, 0.45) 0%,
-    rgba(255, 255, 255, 0.03) 25%,
-    rgba(200, 160, 255, 0.12) 50%,
-    rgba(255, 255, 255, 0.02) 75%,
-    rgba(255, 255, 255, 0.35) 100%
-  );
+  /* 
+     ГЛАВНЫЙ СЕКРЕТ ОПТИКИ:
+     Мы берем фоновое изображение неба, помещаем его внутрь букв 
+     и УВЕЛИЧИВАЕМ (112%), создавая реальный оптический эффект выпуклого стекла!
+  */
+  background: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(200, 160, 255, 0.25) 100%),
+    url("assets/imgs/Section_1/background.f8e0a3e86fb4252623af.png");
+  background-size: 100% 100%, 112% 112%; /* Масштабирование линзы */
+  background-position: center, center 15%;
+  background-repeat: no-repeat;
+  
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  /* 2. Алмазная фаска среза стекла (Primary Bevel Edge) */
-  -webkit-text-stroke: 1.4px rgba(255, 255, 255, 0.55);
+  /* Алмазная фаска среза стекла */
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.7);
 
-  /* 3. Оптическая физика: Дисперсия света + Спекулярный блик + Каустика */
+  /* 
+     Хроматическая дисперсия света (Prism RGB Split):
+     Лазурное преломление слева + Розово-пурпурное справа + Блик на кромке
+  */
   filter:
-    /* Яркий белый блик на кромке стекла (Specular Highlight) */
     drop-shadow(-1px -1px 0px rgba(255, 255, 255, 1))
-    /* Хроматическая аберрация: преломление лазурного спектра (Cyan Rim) */
-    drop-shadow(-2.5px -2px 2px rgba(80, 220, 255, 0.75))
-    /* Хроматическая аберрация: преломление пурпурного спектра (Magenta Rim) */
-    drop-shadow(2.5px 2px 3px rgba(210, 80, 255, 0.65))
-    /* Внутренняя оптическая грань глубины */
-    drop-shadow(1px 1px 0.5px rgba(255, 255, 255, 0.8))
-    /* Мягкая стеклянная каустическая тень на горизонт */
-    drop-shadow(0px 20px 35px rgba(0, 0, 0, 0.85))
-    /* Объемное рассеивание спектра внутри кварца */
-    drop-shadow(0px 0px 40px rgba(168, 85, 247, 0.25));
+    drop-shadow(-3px -2px 2px rgba(0, 230, 255, 0.7))
+    drop-shadow(3px 2px 2px rgba(255, 0, 150, 0.6))
+    drop-shadow(0px 18px 30px rgba(0, 0, 0, 0.85));
 
   transform: translateZ(0);
 }
 
-/* 4. Линзовое преломление: искажает и усиливает контуры гор, заходящих за стекло */
+/* Внутренний линзовый контур искажения */
 .parallax__title::before {
   content: attr(data-text);
   position: absolute;
@@ -167,15 +162,14 @@ body {
   width: 100%;
   height: 100%;
   z-index: -1;
-  /* Утолщенный преломляющий контур линзы */
-  -webkit-text-stroke: 4px rgba(255, 255, 255, 0.2);
+  -webkit-text-stroke: 4px rgba(255, 255, 255, 0.3);
   -webkit-text-fill-color: transparent;
-  filter: blur(2px) drop-shadow(0 0 12px rgba(120, 200, 255, 0.45));
-  mix-blend-mode: color-dodge; /* Физическое преломление проходящих пикселей */
+  filter: blur(1.5px);
+  mix-blend-mode: overlay;
   pointer-events: none;
 }
 
-/* 5. Реалистичный диагональный луч света на зеркальной поверхности стекла */
+/* Диагональный блик скользящего света */
 .parallax__title::after {
   content: attr(data-text);
   position: absolute;
@@ -185,8 +179,8 @@ body {
   z-index: 2;
   background: linear-gradient(
     115deg,
-    transparent 15%,
-    rgba(255, 255, 255, 0.4) 38%,
+    transparent 18%,
+    rgba(255, 255, 255, 0.35) 38%,
     rgba(255, 255, 255, 0.95) 42%,
     rgba(160, 240, 255, 0.5) 45%,
     transparent 55%
@@ -391,7 +385,7 @@ body {
   100% { opacity: 0; transform: translateY(35px) scale(0.5); }
 }
 
-/* ---------------- МОБИЛЬНАЯ ОПТИМИЗАЦИЯ ---------------- */
+/* ---------------- МОБИЛЬНАЯ АДАПТАЦИЯ (ЧЕТКОСТЬ И БЕЗ ЛАГОВ) ---------------- */
 @media (max-width: 768px) {
   .frosted-glass,
   .repo-card {
@@ -405,14 +399,17 @@ body {
     height: 40%;
   }
 
+  /* Чистое стекло-линза на смартфонах */
   .parallax__title {
-    font-size: 16vw;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.45);
+    font-size: 15vw;
+    letter-spacing: -1px;
+    -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.8);
+    background-size: 100% 100%, 120% 120%;
     filter:
       drop-shadow(-1px -1px 0px rgba(255, 255, 255, 0.9))
-      drop-shadow(-2px -2px 2px rgba(80, 220, 255, 0.6))
-      drop-shadow(2px 2px 3px rgba(210, 80, 255, 0.5))
-      drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.85));
+      drop-shadow(-2px -1px 1px rgba(0, 230, 255, 0.6))
+      drop-shadow(2px 1px 1px rgba(255, 0, 150, 0.5))
+      drop-shadow(0 10px 20px rgba(0, 0, 0, 0.85));
   }
 
   .frosted-glass {
